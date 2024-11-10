@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-100">
+<html lang="pt-br">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,24 +12,9 @@
 
         <!-- Bootstrap core CSS -->
         <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
 
         <link rel="icon" href="cs2.png">
-
-        <style>
-            .bd-placeholder-img {
-                font-size: 1.125rem;
-                text-anchor: middle;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                user-select: none;
-            }
-
-            @media (min-width: 768px) {
-                .bd-placeholder-img-lg {
-                  font-size: 3.5rem;
-                }
-            }
-        </style>
 
         <!-- Custom styles for this template -->
         <link href="cover.css" rel="stylesheet">
@@ -53,7 +38,10 @@
                 <h1>Resumo de Partidas</h1>
                 <p class="lead">CS2 Agency.</p>
                 <p class="lead">
-                    <a href="#" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Enviar Arquivo</a>
+                    <label for="fileInput" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Enviar Arquivo</label>
+                    <input type="file" id="fileInput" accept=".txt">
+
+                    <pre id="output">Conteúdo do Arquivo...</pre>
                 </p>
             </main>
 
@@ -63,4 +51,6 @@
         </div>
 
     </body>
+
+    <script src="script.js"></script>
 </html>
