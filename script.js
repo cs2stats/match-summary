@@ -2,12 +2,15 @@ class Matches {
     constructor () {
         this.matches = []
 
+        this.inputElement = document.getElementById('fileInput')
+
         this.createEvents(this)
     }
 
     createEvents (self) {
-        document.getElementById('fileInput').addEventListener('change', function(event) {
+        this.inputElement.addEventListener('change', function(event) {
             self.addMatch(self, event)
+            self.inputElement.value = ''
         })
     }
 
@@ -76,34 +79,74 @@ class Matches {
     }
 }
 
+class Team {
+    constructor (reference, data) {
+        this.reference = reference
+        this.name = data[`team${ reference}`]
+        this.players = Object.entries(data[`PlayersOnTeam${ reference }`]).map(([key, value]) => {
+            return new Player(this, value)
+        })
+
+        console.log(this.players)
+
+        // this.setPlayers()
+    }
+}
+
+class Player {
+    constructor (team, data) {
+        this.team = team
+        this.name = data.name
+        this.kills = data.kills
+        this.deaths = data.deaths
+        this.assists = data.assists
+        this.enemyHSs = (data.enemyHSs / data.kills) * 100
+        this.mvps = data.mvps
+        this.utilityDamage = data.MatchStats.Totals.UtilityDamage
+        this.enemiesFlashed = data.MatchStats.Totals.EnemiesFlashed
+        this.FlashSuccesses = data.MatchStats.Totals.FlashSuccesses
+        this.kd = this.roundToTwo(data.kills / data.deaths)
+        this.damage = data.MatchStats.Totals.Damage
+        this.score = data.score
+        this.objective = data.MatchStats.Totals.Objective
+        this.firstKills = data.firstKs
+        this.knifeKills = data.kills_knife
+        this.clutchKs = data.clutchKs
+
+        this.Count1v1 = data.MatchStats.Totals['1v1Count']
+        this.Wins1v1 = data.MatchStats.Totals['1v1Wins']
+        this.Count1v2 = data.MatchStats.Totals['1v2Count']
+        this.Wins1v2 = data.MatchStats.Totals['1v2Wins']
+
+        this.enemy2Ks = data.enemy2Ks
+        this.enemy3Ks = data.enemy3Ks
+        this.enemy4Ks = data.enemy4Ks
+        this.enemy5Ks = data.enemy5Ks
+
+        this.cashEarned = data.MatchStats.Totals.CashEarned
+        this.entryCount = data.MatchStats.Totals.EntryCount
+        this.entryWins = data.MatchStats.Totals.EntryWins
+        this.equipmentValue = data.MatchStats.Totals.EquipmentValue
+        this.liveTime = data.MatchStats.Totals.LiveTime
+    }
+
+    roundToTwo(num) {
+        return +(Math.round(num + "e+2")  + "e-2");
+    }
+}
+
 class Match {
     constructor (number, data) {
         this.name = `Partida ${ number }`
         this.data = data
+
+        this.teams = [
+            new Team('1', data),
+            new Team('2', data)
+        ]
     }
 
-    // Time
-    // Jogador
-    // Vitímas
-    // Mortes
-    // ASsistências
-    // % HSs
-    // Destaques
-    // DU
-    // IC
-    // K/D
-    // Dano
-    // Pontuação
-    // Reféns entregues
-    // First kill
-    // 1x2 win
-    // Faca
-    // 3k
-    // 4k
-    // 4k
-    // 5k
-    // Gastou
-    // Tempo vivo
+    getPlayersStats () {}
 }
 
 const matches = new Matches()
