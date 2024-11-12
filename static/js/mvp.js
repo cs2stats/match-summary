@@ -112,8 +112,6 @@ $(document).ready(function () {
             </tr>
         `).join('')
 
-        console.log(html)
-
         $('#mvp-score tbody').html(html)
     })
 })

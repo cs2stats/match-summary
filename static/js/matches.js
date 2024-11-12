@@ -165,7 +165,6 @@ class Match {
                 <th class="text-center">${ player.kills }</th>
                 <th class="text-center">${ player.deaths }</th>
                 <th class="text-center">${ player.assists }</th>
-                <th class="text-center">${ player.damage }</th>
                 <th class="text-center">${ player.HSs }</th>
                 <th class="text-center">${ player.enemyHSs }</th>
                 <th class="text-center">${ player.mvps }</th>
@@ -173,7 +172,7 @@ class Match {
                 <th class="text-center">${ player.enemiesFlashed }</th>
                 <th class="text-center">${ player.kd }</th>
                 <th class="text-center">${ player.dmr }</th>
-                <th class="text-center">${ player.score }</th>
+                <th class="text-center">${ player.damage }</th>
                 <th class="text-center">${ player.objective }</th>
                 <th class="text-center">${ player.firstKills }</th>
                 <th class="text-center">${ player.Wins1v1 }</th>
@@ -184,6 +183,7 @@ class Match {
                 <th class="text-center">${ player.enemy5Ks }</th>
                 <th class="text-center">${ player.equipmentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }</th>
                 <th class="text-center">${ player.minutesLive }</th>
+                <th class="text-center">${ player.score }</th>
             </tr>
         `).join('')
     }
