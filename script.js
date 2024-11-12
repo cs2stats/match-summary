@@ -187,7 +187,7 @@ class Match {
                 <th class="text-center">${ player.enemy3Ks }</th>
                 <th class="text-center">${ player.enemy4Ks }</th>
                 <th class="text-center">${ player.enemy5Ks }</th>
-                <th class="text-center">${ player.equipmentValue }</th>
+                <th class="text-center">${ player.equipmentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }</th>
                 <th class="text-center">${ player.minutesLive }</th>
             </tr>
         `).join('')

@@ -25,3 +25,7 @@ pre {
 input[type="file"] {
     display: none;
 }
+
+#mpv_score {
+    user-select: none;
+}
