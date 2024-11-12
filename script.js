@@ -28,7 +28,7 @@ class Matches {
 
               self.matches.push(match)
           }
-    
+
           reader.readAsText(file)
         }
     }
@@ -38,15 +38,15 @@ class Matches {
     }
     
     addNestedKeyRecursive(obj, keys, newKey, value, index = 0) {
-        if (index === keys.length) {            
-        obj[newKey] = !isNaN(value.replace(',', '.')) && value !== "" ? Number(value) :value
-        return
+        if (index === keys.length) {
+            obj[newKey] = !isNaN(value.replace(',', '.')) && value !== "" ? Number(value) :value
+            return
         }
     
         const key = keys[index]
 
         if (!obj[key]) {
-        obj[key] = {}
+            obj[key] = {}
         }
     
         this.addNestedKeyRecursive(obj[key], keys, newKey, value, index + 1)
@@ -64,11 +64,14 @@ class Matches {
             if (!line) return // Ignore empty lines
             if (line.endsWith('{')) return // Ignore new object lines
 
-            const [key, value] = line.split(/\s+/).map(str => str.replace(/"/g, '').trim())
-
             if (line.endsWith('}')) {
                 keys.pop()
-            } else if (key !== undefined && value == undefined) {
+                return
+            }
+
+            const [key, value] = line.match(/"([^"]*)"/g).map(s => s.replace(/"/g, ''))
+
+            if (key !== undefined && value == undefined) {
                 keys.push(key)
             } else if (key !== undefined && value !== undefined) {            
                 this.addNestedKeyRecursive(json, keys, key, value)
@@ -84,23 +87,21 @@ class Team {
         this.reference = reference
         this.name = data[`team${ reference}`]
         this.players = Object.entries(data[`PlayersOnTeam${ reference }`]).map(([key, value]) => {
-            return new Player(this, value)
+            return new Player(this, value, data)
         })
-
-        console.log(this.players)
 
         // this.setPlayers()
     }
 }
 
 class Player {
-    constructor (team, data) {
+    constructor (team, data, match) {
         this.team = team
         this.name = data.name
         this.kills = data.kills
         this.deaths = data.deaths
         this.assists = data.assists
-        this.enemyHSs = (data.enemyHSs / data.kills) * 100
+        this.enemyHSs = this.roundToTwo((data.enemyHSs / data.kills) * 100)
         this.mvps = data.mvps
         this.utilityDamage = data.MatchStats.Totals.UtilityDamage
         this.enemiesFlashed = data.MatchStats.Totals.EnemiesFlashed
@@ -112,6 +113,7 @@ class Player {
         this.firstKills = data.firstKs
         this.knifeKills = data.kills_knife
         this.clutchKs = data.clutchKs
+        this.dmr = this.roundToTwo((data.MatchStats.Totals.Damage / match.round))
 
         this.Count1v1 = data.MatchStats.Totals['1v1Count']
         this.Wins1v1 = data.MatchStats.Totals['1v1Wins']
@@ -131,12 +133,13 @@ class Player {
     }
 
     roundToTwo(num) {
-        return +(Math.round(num + "e+2")  + "e-2");
+        return +(Math.round(num + "e+2")  + "e-2")
     }
 }
 
 class Match {
     constructor (number, data) {
+        this.id = number
         this.name = `Partida ${ number }`
         this.data = data
 
@@ -144,11 +147,93 @@ class Match {
             new Team('1', data),
             new Team('2', data)
         ]
+
+        this.createMatchSection(this)
     }
 
-    getPlayersStats () {}
+    getPlayersByMPVPoint () {
+        console.log()
+    }
+
+    getPlayersByTeam (team) {
+        return team.players.map(player => `
+            <tr>
+                <th>${ player.name }</th>
+                <th class="text-center">${ player.kills }</th>
+                <th class="text-center">${ player.deaths }</th>
+                <th class="text-center">${ player.assists }</th>
+                <th class="text-center">${ player.enemyHSs }</th>
+                <th class="text-center">${ player.mvps }</th>
+                <th class="text-center">${ player.utilityDamage }</th>
+                <th class="text-center">${ player.enemiesFlashed }</th>
+                <th class="text-center">${ player.kd }</th>
+                <th class="text-center">${ player.dmr }</th>
+                <th class="text-center">${ player.damage }</th>
+            </tr>
+        `).join('')
+
+        // objective
+        // FlashSuccesses
+        // Wins1v1
+        // Wins1v2
+        // cashEarned
+        // clutchKs
+        // enemy2Ks
+        // enemy3Ks
+        // enemy4Ks
+        // enemy5Ks
+        // entryCount
+        // entryWins
+        // equipmentValue
+        // firstKills
+        // knifeKills
+        // liveTime
+        // score
+    }
+
+    createMatchSection (self) {
+        $.get('match.html', function(matchData) {
+            matchData = matchData.replace('{{matchId}}', self.id)
+            matchData = matchData.replace('{{matchName}}', self.name)
+        
+            const teamPromises = Array(2).fill(0).map((_, i) => {
+                return $.get('team.html').then(function(teamData) {
+                    // Substitui placeholders no arquivo team.html
+                    teamData = teamData.replace('{{teamName}}', `${self.teams[i].name}`)
+                    teamData = teamData.replace('{{players}}', self.getPlayersByTeam(self.teams[i]))
+        
+                    return teamData
+                })
+            })
+
+            Promise.all(teamPromises).then((teamContents) => {
+                const $matchContent = $('<div>').html(matchData)
+        
+                teamContents.forEach((teamContent) => {
+                    $matchContent.find(`#match-${self.id} .teams`).append(teamContent)
+                })
+
+                $('#matches').append($matchContent.html())
+            })
+        })        
+    }
+
+    createTeamsSection (self) {
+        console.log($('match-1'))
+    }
 }
 
 const matches = new Matches()
 
 window.matches = matches
+
+// content.load(`templates/${ switchLanguage ? language.code : '' }/${ path }.html`, function() {
+//     if (!['album', 'author', 'music'].includes(currentContent.content)) {
+//         updateLanguage()
+//     }
+// })
+
+
+// if ($(window).width() < 768 && $('#sidebar').width() > 250) {
+//     $('#sidebar').toggleClass('toggled')
+// }

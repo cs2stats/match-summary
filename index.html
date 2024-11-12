@@ -1,55 +1,60 @@
-<!doctype html>
-<html lang="pt-br">
+<!docth3.h4.h5.h6.h7.h83.h4.h5.h6.h7.h8pe html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
         <meta name="generator" content="Hugo 0.84.0">
-        <title>Resumo de Partidas</title>
+        <title>Heroes · Bootstrap v5.0</title>
 
-        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
+        <link rel="icon" href="cs2.png">
 
         <!-- Bootstrap core CSS -->
         <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="style.css" rel="stylesheet">
-
-        <link rel="icon" href="cs2.png">
-
+        
         <!-- Custom styles for this template -->
-        <link href="cover.css" rel="stylesheet">
+        <link href="heroes.css" rel="stylesheet">
     </head>
 
-    <body class="d-flex h-100 text-center text-white bg-dark">
-      
-        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-            <header class="mb-auto">
-                <div>
-                    <h3 class="float-md-start mb-0">Resumo</h3>
-                    <nav class="nav nav-masthead justify-content-center float-md-end">
-                        <a class="nav-link active" aria-current="page" href="#">Resumo</a>
-                        <a class="nav-link" href="#">Sobre</a>
-                        <a class="nav-link" href="#">Contato</a>
-                    </nav>
-                </div>
-            </header>
+    <body>
+        <main>
+            <h1 class="visually-hidden">Heroes examples</h1>
 
-            <main class="px-3">
-                <p class="lead">CS2 Agency.</p>
-                <p class="lead">
-                    <label for="fileInput" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Adicionar Partida</label>
+            <div class="px-4 py-5 my-5 text-center">
+                <img class="d-block mx-auto mb-4" src="cs2-logo.jpg" alt="" width="72" height="72">
+                <h1 class="display-5 fw-bold">CS2 - Resumo de Partidas</h1>
+                <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">
+                    MVP = ∑
+                        <br> <b>Vítimas</b> * 1
+                        <br> <b>Mortes</b> * - 0,10
+                        <br> <b>Assistências</b> * 0,50
+                        <br> <b>% HS</b> = <i>10% do Valor (???)</i>
+                        <br> <b>Destaques</b> * 2
+                        <br> <b>10 Dano com utilitário</b> * 0,10
+                        <br> <b>Inimigo cego</b> (IC) * 0,10
+                        <br> <b>KD</b> * 2
+                        <br> <b>100 Dado</b> * 1 = <i>(1% do valor ???)</i>
+                </p>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <label type="button" for="fileInput" class="btn btn-primary btn-lg px-4 gap-3">Adicionar Partida</label>
                     <input type="file" id="fileInput" accept=".txt">
 
-                    <pre id="output">Conteúdo do Arquivo...</pre>
-                </p>
-            </main>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">MVP</button>
+                </div>
+                </div>
+            </div>
 
-            <footer class="mt-auto text-white-50">
-                <p>by <a href="" class="text-white">@RkHunter</a>.</p>
-            </footer>
-        </div>
+            <div class="b-example-divider"></div>
 
+            <div id="matches"></div>
+
+            <div id="totals"></div>
+        </main>
     </body>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </html>
