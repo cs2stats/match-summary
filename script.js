@@ -182,6 +182,7 @@ class Match {
                 <th class="text-center">${ player.score }</th>
                 <th class="text-center">${ player.objective }</th>
                 <th class="text-center">${ player.firstKills }</th>
+                <th class="text-center">${ player.Wins1v1 }</th>
                 <th class="text-center">${ player.Wins1v2 }</th>
                 <th class="text-center">${ player.knifeKills }</th>
                 <th class="text-center">${ player.enemy3Ks }</th>
@@ -191,24 +192,6 @@ class Match {
                 <th class="text-center">${ player.minutesLive }</th>
             </tr>
         `).join('')
-
-        // objective
-        // FlashSuccesses
-        // Wins1v1
-        // Wins1v2
-        // cashEarned
-        // clutchKs
-        // enemy2Ks
-        // enemy3Ks
-        // enemy4Ks
-        // enemy5Ks
-        // entryCount
-        // entryWins
-        // equipmentValue
-        // firstKills
-        // knifeKills
-        // liveTime
-        // score
     }
 
     createMatchSection (self) {
