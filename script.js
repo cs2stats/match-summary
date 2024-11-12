@@ -101,6 +101,7 @@ class Player {
         this.kills = data.kills
         this.deaths = data.deaths
         this.assists = data.assists
+        this.HSs = data.enemyHSs
         this.enemyHSs = this.roundToTwo((data.enemyHSs / data.kills) * 100)
         this.mvps = data.mvps
         this.utilityDamage = data.MatchStats.Totals.UtilityDamage
@@ -130,10 +131,18 @@ class Player {
         this.entryWins = data.MatchStats.Totals.EntryWins
         this.equipmentValue = data.MatchStats.Totals.EquipmentValue
         this.liveTime = data.MatchStats.Totals.LiveTime
+        this.minutesLive = this.formatLiveTime(data.MatchStats.Totals.LiveTime)
     }
 
-    roundToTwo(num) {
+    roundToTwo (num) {
         return +(Math.round(num + "e+2")  + "e-2")
+    }
+
+    formatLiveTime (totalSeconds) {
+        const minutes = Math.floor(totalSeconds / 60)
+        const seconds = totalSeconds % 60
+    
+        return `${minutes}:${String(seconds).padStart(2, '0')}`
     }
 }
 
@@ -162,13 +171,24 @@ class Match {
                 <th class="text-center">${ player.kills }</th>
                 <th class="text-center">${ player.deaths }</th>
                 <th class="text-center">${ player.assists }</th>
+                <th class="text-center">${ player.damage }</th>
+                <th class="text-center">${ player.HSs }</th>
                 <th class="text-center">${ player.enemyHSs }</th>
                 <th class="text-center">${ player.mvps }</th>
                 <th class="text-center">${ player.utilityDamage }</th>
                 <th class="text-center">${ player.enemiesFlashed }</th>
                 <th class="text-center">${ player.kd }</th>
                 <th class="text-center">${ player.dmr }</th>
-                <th class="text-center">${ player.damage }</th>
+                <th class="text-center">${ player.score }</th>
+                <th class="text-center">${ player.objective }</th>
+                <th class="text-center">${ player.firstKills }</th>
+                <th class="text-center">${ player.Wins1v2 }</th>
+                <th class="text-center">${ player.knifeKills }</th>
+                <th class="text-center">${ player.enemy3Ks }</th>
+                <th class="text-center">${ player.enemy4Ks }</th>
+                <th class="text-center">${ player.enemy5Ks }</th>
+                <th class="text-center">${ player.equipmentValue }</th>
+                <th class="text-center">${ player.minutesLive }</th>
             </tr>
         `).join('')
 
