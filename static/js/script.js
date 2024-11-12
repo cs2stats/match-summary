@@ -89,8 +89,6 @@ class Team {
         this.players = Object.entries(data[`PlayersOnTeam${ reference }`]).map(([key, value]) => {
             return new Player(this, value, data)
         })
-
-        // this.setPlayers()
     }
 }
 
@@ -160,10 +158,6 @@ class Match {
         this.createMatchSection(this)
     }
 
-    getPlayersByMPVPoint () {
-        console.log()
-    }
-
     getPlayersByTeam (team) {
         return team.players.map(player => `
             <tr>
@@ -195,13 +189,12 @@ class Match {
     }
 
     createMatchSection (self) {
-        $.get('match.html', function(matchData) {
+        $.get('templates/match.html', function(matchData) {
             matchData = matchData.replace('{{matchId}}', self.id)
             matchData = matchData.replace('{{matchName}}', self.name)
         
             const teamPromises = Array(2).fill(0).map((_, i) => {
-                return $.get('team.html').then(function(teamData) {
-                    // Substitui placeholders no arquivo team.html
+                return $.get('templates/team.html').then(function(teamData) {
                     teamData = teamData.replace('{{teamName}}', `${self.teams[i].name}`)
                     teamData = teamData.replace('{{players}}', self.getPlayersByTeam(self.teams[i]))
         
@@ -220,23 +213,8 @@ class Match {
             })
         })        
     }
-
-    createTeamsSection (self) {
-        console.log($('match-1'))
-    }
 }
 
 const matches = new Matches()
 
 window.matches = matches
-
-// content.load(`templates/${ switchLanguage ? language.code : '' }/${ path }.html`, function() {
-//     if (!['album', 'author', 'music'].includes(currentContent.content)) {
-//         updateLanguage()
-//     }
-// })
-
-
-// if ($(window).width() < 768 && $('#sidebar').width() > 250) {
-//     $('#sidebar').toggleClass('toggled')
-// }
