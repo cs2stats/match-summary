@@ -98,6 +98,7 @@ class Player {
         this.name = data.name
         this.kills = data.kills
         this.deaths = data.deaths
+        this.kd = this.roundToTwo(data.kills / data.deaths)
         this.assists = data.assists
         this.HSs = data.enemyHSs
         this.enemyHSs = this.roundToTwo((data.enemyHSs / data.kills) * 100)
@@ -105,7 +106,6 @@ class Player {
         this.utilityDamage = data.MatchStats.Totals.UtilityDamage
         this.enemiesFlashed = data.MatchStats.Totals.EnemiesFlashed
         this.FlashSuccesses = data.MatchStats.Totals.FlashSuccesses
-        this.kd = this.roundToTwo(data.kills / data.deaths)
         this.damage = data.MatchStats.Totals.Damage
         this.score = data.score
         this.objective = data.MatchStats.Totals.Objective
@@ -130,6 +130,54 @@ class Player {
         this.equipmentValue = data.MatchStats.Totals.EquipmentValue
         this.liveTime = data.MatchStats.Totals.LiveTime
         this.minutesLive = this.formatLiveTime(data.MatchStats.Totals.LiveTime)
+
+        // Score
+
+        this.scoreKills = data.kills * 1 // Vítimas
+        this.scoreDeaths = data.deaths * -0.5 // Mortes
+        this.scoreKD = this.kd * 2 // KD
+        this.scoreHighlights = data.mvps * 2 // Destaques
+        this.scoreAssists = data.assists * 0.5 // Assistências
+        this.scoreDamage = this.damage / 100 // Dano
+        this.scoreHS = this.enemyHSs * 0.1 // % HS
+        this.scoreUtilityDamage = (this.utilityDamage / 10) * 0.1 // Dano com utilitário
+        this.scoreEnemiesFlashed = this.enemiesFlashed * 0.1 // Inimigo cego
+        this.scoreFirstKills = data.firstKs * 0.5 // Primeira eliminação do round
+        this.score1v1 = this.Count1v1 * 1 //1x1
+        this.score2v1 = this.Count1v1 * 2 //2x1
+        this.score3Kills = this.enemy3Ks * 1 // 3 Eliminações no round
+        this.score4Kills = this.enemy4Ks * 3 // 4 Eliminações no round
+        this.score5Kills = this.enemy5Ks * 5 // 5 Eliminações no round
+        this.scoreKnife = data.kills_knife * 5 // Eliminação com Faca
+        this.scoreKillsPistol = data.kills_weapon_pistol * 0.5 // Eliminações com Pistola
+        this.scoreKillsSniper = data.kills_weapon_sniper * 0.25 // Eliminações com Sniper
+        this.scoreRoundsWithoutDying = match.round - data.deaths // Rounds sem morrer
+        this.scoreTimeAlive = (this.liveTime / 60) * 1 // Tempo vivo
+
+        this.mvpScore = (
+            this.scoreKills +
+            this.scoreDeaths +
+            this.scoreKD +
+            this.scoreHighlights +
+            this.scoreAssists +
+            this.scoreDamage +
+            this.scoreHS +
+            this.scoreUtilityDamage +
+            this.scoreEnemiesFlashed +
+            this.scoreFirstKills +
+            this.score1v1 +
+            this.score2v1 +
+            this.score3Kills +
+            this.score4Kills +
+            this.score5Kills +
+            this.scoreKnife +
+            this.scoreKillsPistol +
+            this.scoreKillsSniper +
+            this.scoreRoundsWithoutDying +
+            this.scoreTimeAlive
+        ).toFixed(2)
+
+        console.log(this.name, 'score:', this.mvpScore)
     }
 
     roundToTwo (num) {

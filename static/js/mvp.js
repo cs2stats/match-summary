@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    MPV_CONSTANT = [
+    MVP_CONSTANT = [
         {
             data: 'Vítimas',
             measure: '1',
@@ -46,14 +46,19 @@ $(document).ready(function () {
             score: '0,10',
         },
         {
-            data: '2x1',
+            data: 'Primeira eliminação do round',
             measure: '1',
-            score: '2',
+            score: '0,5',
         },
         {
             data: '1x1',
             measure: '1',
             score: '1',
+        },
+        {
+            data: '2x1',
+            measure: '1',
+            score: '2',
         },
         {
             data: '3 Eliminações no round',
@@ -81,14 +86,9 @@ $(document).ready(function () {
             score: '0,5',
         },
         {
-            data: 'Primeira eliminação da partida',
+            data: 'Eliminações com Sniper',
             measure: '1',
-            score: '2',
-        },
-        {
-            data: 'Última eliminação da partida',
-            measure: '1',
-            score: '2',
+            score: '0,25',
         },
         {
             data: 'Rounds sem morrer',
@@ -102,8 +102,8 @@ $(document).ready(function () {
         },
     ]
 
-    MPV_CONSTANT.map((mvp, index) => {
-        const html = MPV_CONSTANT.map((mvp, index) => `
+    MVP_CONSTANT.map((mvp, index) => {
+        const html = MVP_CONSTANT.map((mvp, index) => `
             <tr>
                 <th scope="row">${ index + 1 }</th>
                 <td>${ mvp.data }</td>
