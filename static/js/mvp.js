@@ -36,7 +36,7 @@ $(document).ready(function () {
             score: '10%',
         },
         {
-            data: 'Dano com utilitário',
+            data: 'Dano com utilitárias ',
             measure: '10',
             score: '0,10',
         },
