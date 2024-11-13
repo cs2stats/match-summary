@@ -8,7 +8,7 @@ $(document).ready(function () {
         {
             data: 'Mortes',
             measure: '1',
-            score: '-0,10',
+            score: '-0,5',
         },
         {
             data: 'KD',
@@ -47,27 +47,27 @@ $(document).ready(function () {
         },
         {
             data: '2x1',
-            measure: '-',
+            measure: '1',
             score: '2',
         },
         {
             data: '1x1',
-            measure: '-',
+            measure: '1',
             score: '1',
         },
         {
             data: '3 Eliminações no round',
-            measure: '-',
+            measure: '1',
             score: '1',
         },
         {
             data: '4 Eliminações no round',
-            measure: '-',
+            measure: '1',
             score: '3',
         },
         {
             data: '5 Eliminações no round',
-            measure: '-',
+            measure: '1',
             score: '5',
         },
         {
