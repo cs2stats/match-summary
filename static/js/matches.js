@@ -25,24 +25,21 @@ class Matches {
         const file = event.target.files[0]
 
         if (file) {
-          const reader = new FileReader()
+            const reader = new FileReader()
     
-          reader.onload = function(e) {
-              const textContent = e.target.result
-              const jsonObject = self.parseToJSON(textContent)
+            reader.onload = function(e) {
+                const textContent = e.target.result
+                const jsonObject = self.parseToJSON(textContent)
 
-              const match = new Match(self.matches.length + 1, jsonObject)
+                const match = new Match(self.matches.length + 1, jsonObject)
 
-              console.log(1)
-
-              self.matches.push(match)
-
-              console.log(2)
+                self.matches.push(match)
 
                 self.generateMatchSummary()
-          }
+                self.updatePodium()
+            }
 
-          reader.readAsText(file)
+            reader.readAsText(file)
         }
     }
 
@@ -137,13 +134,25 @@ class Matches {
     }
 
     setMatchSummary(matchSummary) {
-        console.log(sortObjectByAttribute(matchSummary, 'mvpScore'))
         this.matchSummary = sortObjectByAttribute(matchSummary, 'mvpScore')
     }
 
     getPlayerWithMaxAttribute(attribute) {
         return Object.values(this.matchSummary).reduce((maxPlayer, currentPlayer) => {
             return currentPlayer[attribute] > maxPlayer[attribute] ? currentPlayer : maxPlayer
+        })
+    }
+
+    updatePodium() {
+        this.matchSummary.forEach((player, index) => {
+            console.log(player, index + 1)
+
+            $(`#podium [podium-score=${ index + 1 }]`).text(player.mvpScore.toString().replace('.', ','))
+            $(`#podium [podium-name=${ index + 1 }]`).text(playersData[player.id].name)
+
+            if (index + 1 <= 3) {
+                $(`#podium [podium-photo=${ index + 1 }]`).attr('src', `${ playersData[player.id].avatar }`)
+            }
         })
     }
 }
