@@ -145,8 +145,6 @@ class Matches {
 
     updatePodium() {
         this.matchSummary.forEach((player, index) => {
-            console.log(player, index + 1)
-
             $(`#podium [podium-score=${ index + 1 }]`).text(player.mvpScore.toString().replace('.', ','))
             $(`#podium [podium-name=${ index + 1 }]`).text(playersData[player.id].name)
 
