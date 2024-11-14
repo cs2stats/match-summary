@@ -132,7 +132,7 @@ class Matches {
                 })
             })
         })
-      
+
         this.setMatchSummary(matchSummary)
     }
 

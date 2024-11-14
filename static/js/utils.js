@@ -12,3 +12,14 @@ function sortObjectByAttribute(obj, attribute, desc = true) {
         return desc ? valueB - valueA : valueA - valueB
     })
 }
+
+// function sortObjectByAttribute(obj, attribute, desc = true) {
+//     return Object.fromEntries(
+//       Object.entries(obj)
+//         .sort(([, a], [, b]) => {
+//           const valueA = a[attribute];
+//           const valueB = b[attribute];
+//           return desc ? valueB - valueA : valueA - valueB;
+//         })
+//     );
+// }
