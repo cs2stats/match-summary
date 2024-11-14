@@ -32,8 +32,15 @@ input[type="file"] {
     user-select: none;
 }
 
-#totals {
+#highlights {
     padding: 1rem !important;
+    margin: 1rem 2rem 0 2rem;
+    padding: 1rem !important;
+    --bs-gutter-x: 1rem;
+}
+
+#highlights .card {
+    max-height: 129px;
 }
 
 @media (min-width: 768px) {

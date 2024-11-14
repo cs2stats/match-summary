@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    MVP_CONSTANT = [
+    const mvpScore = [
         {
             data: 'Vítimas',
             measure: '1',
@@ -102,8 +102,8 @@ $(document).ready(function () {
         },
     ]
 
-    MVP_CONSTANT.map((mvp, index) => {
-        const html = MVP_CONSTANT.map((mvp, index) => `
+    mvpScore.map((mvp, index) => {
+        const html = mvpScore.map((mvp, index) => `
             <tr>
                 <th scope="row">${ index + 1 }</th>
                 <td>${ mvp.data }</td>
