@@ -11,19 +11,24 @@ $(document).ready(function () {
             score: '-0,5',
         },
         {
+            data: 'Assistências',
+            measure: '1',
+            score: '0,5',
+        },
+        {
             data: 'KD',
             measure: 'Total',
             score: 'x2',
         },
         {
-            data: 'Destaques',
+            data: 'Reféns entregues',
             measure: '1',
             score: '2',
         },
         {
-            data: 'Assistências',
+            data: 'Destaques',
             measure: '1',
-            score: '0,5',
+            score: '1',
         },
         {
             data: 'Dano',

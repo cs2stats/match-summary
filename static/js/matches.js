@@ -15,28 +15,33 @@ class Matches {
     }
 
     createEvents (self) {
-        this.inputElement.addEventListener('change', function(event) {
-            self.addMatch(self, event)
-            self.inputElement.value = ''
-        })
+        if (this.inputElement !== null) {
+            this.inputElement.addEventListener('change', function(event) {
+                self.addMatchFromEvent(self, event)
+                self.inputElement.value = ''
+            })
+        }
     }
 
-    addMatch (self, event) {
+    addMatch(textContent) {
+        const jsonObject = this.parseToJSON(textContent)
+
+        const match = new Match(this.matches.length + 1, jsonObject)
+
+        this.matches.push(match)
+
+        this.generateMatchSummary()
+        this.updatePodium()
+    }
+
+    addMatchFromEvent(self, event) {
         const file = event.target.files[0]
 
         if (file) {
             const reader = new FileReader()
     
             reader.onload = function(e) {
-                const textContent = e.target.result
-                const jsonObject = self.parseToJSON(textContent)
-
-                const match = new Match(self.matches.length + 1, jsonObject)
-
-                self.matches.push(match)
-
-                self.generateMatchSummary()
-                self.updatePodium()
+                self.addMatch(e.target.result)
             }
 
             reader.readAsText(file)
@@ -156,25 +161,27 @@ class Matches {
                 <th class="text-center">${ player.kills }</th>
                 <th class="text-center">${ player.deaths }</th>
                 <th class="text-center">${ player.assists }</th>
+                <th class="text-center">${ player.kd }</th>
+                <th class="text-center">${ player.objective }</th>
+                <th class="text-center">${ player.mvps }</th>
                 <th class="text-center">${ player.HSs }</th>
                 <th class="text-center">${ player.enemyHSs }</th>
-                <th class="text-center">${ player.mvps }</th>
                 <th class="text-center">${ player.utilityDamage }</th>
                 <th class="text-center">${ player.enemiesFlashed }</th>
-                <th class="text-center">${ player.kd }</th>
-                <th class="text-center">${ player.dmr }</th>
                 <th class="text-center">${ player.damage }</th>
-                <th class="text-center">${ player.objective }</th>
+                <th class="text-center">${ player.dmr }</th>
                 <th class="text-center">${ player.firstKills }</th>
                 <th class="text-center">${ player.Wins1v1 }</th>
                 <th class="text-center">${ player.Wins1v2 }</th>
-                <th class="text-center">${ player.knifeKills }</th>
                 <th class="text-center">${ player.enemy3Ks }</th>
                 <th class="text-center">${ player.enemy4Ks }</th>
                 <th class="text-center">${ player.enemy5Ks }</th>
-                <th class="text-center">${ player.equipmentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }</th>
+                <th class="text-center">${ player.knifeKills }</th>
+                <th class="text-center">${ player.pistolKills }</th>
+                <th class="text-center">${ player.SniperKills }</th>
                 <th class="text-center">${ formatLiveTime(player.liveTime) }</th>
                 <th class="text-center">${ player.score }</th>
+                <th class="text-center">${ player.equipmentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }</th>
                 <th class="text-center">${ player.mvpScore }</th>
             </tr>
         `
@@ -189,11 +196,12 @@ class Matches {
                 <th class="text-center">${ player.scoreKills }</th>
                 <th class="text-center">${ player.scoreDeaths }</th>
                 <th class="text-center">${ player.scoreAssists }</th>
-                <th class="text-center">${ player.scoreHS }</th>
+                <th class="text-center">${ player.scoreKD }</th>
+                <th class="text-center">${ player.scoreObjective }</th>
                 <th class="text-center">${ player.scoreHighlights }</th>
+                <th class="text-center">${ player.scoreHS }</th>
                 <th class="text-center">${ player.scoreUtilityDamage }</th>
                 <th class="text-center">${ player.scoreEnemiesFlashed }</th>
-                <th class="text-center">${ player.scoreKD }</th>
                 <th class="text-center">${ player.scoreDamage }</th>
                 <th class="text-center">${ player.scoreFirstKills }</th>
                 <th class="text-center">${ player.score1v1 }</th>
@@ -248,12 +256,12 @@ class Match {
     }
 
     createMatchSection (self) {
-        $.get('templates/match.html', function(matchData) {
+        $.get('/templates/match.html', function(matchData) {
             matchData = matchData.replace('{{matchId}}', self.id)
             matchData = matchData.replace('{{matchName}}', self.name)
         
             const teamPromises = Array(2).fill(0).map((_, i) => {
-                return $.get('templates/team.html').then(function(teamData) {
+                return $.get('/templates/team.html').then(function(teamData) {
                     teamData = teamData.replace('{{teamName}}', `${self.teams[i].name}`)
                     teamData = teamData.replace('{{players}}', self.getPlayersByTeam(self.teams[i]))
         
@@ -333,6 +341,8 @@ class Player {
         this.objective = data.MatchStats.Totals.Objective
         this.firstKills = data.firstKs
         this.knifeKills = data.kills_knife
+        this.pistolKills = data.kills_weapon_pistol
+        this.SniperKills = data.kills_weapon_pistol
         this.clutchKs = data.clutchKs
         this.dmr = this.roundToTwo((data.MatchStats.Totals.Damage / match.round))
 
@@ -357,9 +367,10 @@ class Player {
 
         this.scoreKills = data.kills * 1 // Vítimas
         this.scoreDeaths = data.deaths * -0.5 // Mortes
-        this.scoreKD = this.kd * 2 // KD
-        this.scoreHighlights = data.mvps * 2 // Destaques
         this.scoreAssists = data.assists * 0.5 // Assistências
+        this.scoreKD = this.kd * 2 // KD
+        this.scoreObjective = this.objective * 1 // Destaques
+        this.scoreHighlights = data.mvps * 2 // Destaques
         this.scoreDamage = this.damage / 100 // Dano
         this.scoreHS = this.enemyHSs * 0.1 // % HS
         this.scoreUtilityDamage = (this.utilityDamage / 10) * 0.1 // Dano com utilitário
@@ -379,9 +390,10 @@ class Player {
         this.mvpScore = (
             this.scoreKills +
             this.scoreDeaths +
-            this.scoreKD +
-            this.scoreHighlights +
             this.scoreAssists +
+            this.scoreKD +
+            this.scoreObjective +
+            this.scoreHighlights +
             this.scoreDamage +
             this.scoreHS +
             this.scoreUtilityDamage +
