@@ -240,7 +240,7 @@ $(document).ready(function () {
 
             highlight.find('img').attr('src', playersData[player.id].avatar)
             highlight.find('.card-body').append(`
-                <p><b>Resultado</b>: ${ player[attribute] }.</p>
+                <p><b>Resultado</b>: ${ playersData[player.id].name } com ${ player[attribute] }.</p>
             `)
         }
     })

@@ -369,7 +369,7 @@ class Player {
         this.scoreDeaths = data.deaths * -0.5 // Mortes
         this.scoreAssists = data.assists * 0.5 // Assistências
         this.scoreKD = this.kd * 2 // KD
-        this.scoreObjective = this.objective * 1 // Destaques
+        this.scoreObjective = this.objective * 2 // Destaques
         this.scoreHighlights = data.mvps * 2 // Destaques
         this.scoreDamage = this.damage / 100 // Dano
         this.scoreHS = this.enemyHSs * 0.1 // % HS

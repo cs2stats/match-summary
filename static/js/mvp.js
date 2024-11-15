@@ -28,7 +28,7 @@ $(document).ready(function () {
         {
             data: 'Destaques',
             measure: '1',
-            score: '1',
+            score: '2',
         },
         {
             data: 'Dano',
