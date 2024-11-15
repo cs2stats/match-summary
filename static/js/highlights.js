@@ -76,7 +76,7 @@ $(document).ready(function () {
             cover: defaultCover,
         },
         {
-            title: "U can't se me?",
+            title: "Can't you see me?",
             description: 'Mais inimigos cegos (IC).',
             attribute: '',
             condition: conditions[0],
