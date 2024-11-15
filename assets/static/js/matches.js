@@ -256,12 +256,12 @@ class Match {
     }
 
     createMatchSection (self) {
-        $.get('/templates/match.html', function(matchData) {
+        $.get(`${ relativePath }/templates/match.html`, function(matchData) {
             matchData = matchData.replace('{{matchId}}', self.id)
             matchData = matchData.replace('{{matchName}}', self.name)
         
             const teamPromises = Array(2).fill(0).map((_, i) => {
-                return $.get('/templates/team.html').then(function(teamData) {
+                return $.get(`${ relativePath }/templates/team.html`).then(function(teamData) {
                     teamData = teamData.replace('{{teamName}}', `${self.teams[i].name}`)
                     teamData = teamData.replace('{{players}}', self.getPlayersByTeam(self.teams[i]))
         
