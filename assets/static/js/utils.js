@@ -24,9 +24,9 @@ function transformToRelative() {
     if (index !== -1) {
         segments.splice(index, 1)
 
-        console.log(segments, segments.length > 0 ? `${ projectName }${ '/../'.repeat(segments.length) }` : `${ projectName }/`)
+        console.log(segments, segments.length > 0 ? `/${ projectName }${ '../'.repeat(segments.length) }` : `/${ projectName }/`)
 
-        return segments.length > 0 ? `${ projectName }${ '/../'.repeat(segments.length) }` : `${ projectName }/`
+        return segments.length > 0 ? `/${ projectName }${ '../'.repeat(segments.length) }` : `/${ projectName }/`
     }
 
     return segments.length > 0 ? '../'.repeat(segments.length) : ''
