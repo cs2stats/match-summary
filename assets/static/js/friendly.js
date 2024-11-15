@@ -1,6 +1,5 @@
 $(document).ready(function () {
     const scripts = [
-        '../../assets/static/js/utils.js',
         '../../assets/static/js/players.js',
         '../../assets/static/js/mvp.js',
         '../../assets/static/js/matches.js',
