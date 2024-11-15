@@ -21,6 +21,8 @@ $(document).ready(function () {
         const index = segments.indexOf(projectName)
 
         if (index !== -1) {
+            console.log($('a'), $('a[href]'))
+
             $('a[href]').each(function() {
                 var currentHref = $(this).attr('href')
 
