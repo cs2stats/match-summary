@@ -1,3 +1,5 @@
+const projectName = 'match-summary'
+
 function formatLiveTime (totalSeconds) {
     const minutes = Math.floor(totalSeconds / 60)
     const seconds = totalSeconds % 60
@@ -15,10 +17,12 @@ function sortObjectByAttribute(obj, attribute, desc = true) {
 
 function transformToRelative() {
     const segments = window.location.pathname.substring(1).split('/').filter(segment => segment !== '')
-    const index = segments.indexOf('match-summary')
+    const index = segments.indexOf(projectName)
 
     if (index !== -1) {
         segments.splice(index, 1)
+
+        return segments.length > 0 ? `${ projectName }${ '/../'.repeat(segments.length) }` : `${ projectName }`
     }
 
     return segments.length > 0 ? '../'.repeat(segments.length) : ''
