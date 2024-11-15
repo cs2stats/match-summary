@@ -9,7 +9,13 @@
     justify-content: center;
     align-items: center;
 }
-  
+
+.podium [podium-name] {
+    max-width: 160px;
+    word-break: break-all;
+    text-align: center;
+}
+
 .podium__item {
     width: 200px;
 }

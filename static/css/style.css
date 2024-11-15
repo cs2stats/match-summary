@@ -39,10 +39,6 @@ input[type="file"] {
     --bs-gutter-x: 1rem;
 }
 
-#highlights .card {
-    max-height: 129px;
-}
-
 #podium table th {
     width: 10px;
 }

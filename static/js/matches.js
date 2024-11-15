@@ -46,7 +46,7 @@ class Matches {
     getMatchByName () {
         this.matches.push()
     }
-    
+
     addNestedKeyRecursive(obj, keys, newKey, value, index = 0) {
         if (index === keys.length) {
             obj[newKey] = !isNaN(value.replace(',', '.')) && value !== "" ? Number(value) :value
@@ -137,21 +137,99 @@ class Matches {
         this.matchSummary = sortObjectByAttribute(matchSummary, 'mvpScore')
     }
 
-    getPlayerWithMaxAttribute(attribute) {
-        return Object.values(this.matchSummary).reduce((maxPlayer, currentPlayer) => {
-            return currentPlayer[attribute] > maxPlayer[attribute] ? currentPlayer : maxPlayer
+    getPlayerByAttribute(attribute, isMax=true) {
+        return Object.values(this.matchSummary).reduce((selectedPlayer, currentPlayer) => {
+            const comparison = isMax
+                ? currentPlayer[attribute] > selectedPlayer[attribute]
+                : currentPlayer[attribute] < selectedPlayer[attribute]
+
+            return comparison ? currentPlayer : selectedPlayer
         })
     }
 
-    updatePodium() {
-        this.matchSummary.forEach((player, index) => {
-            $(`#podium [podium-score=${ index + 1 }]`).text(player.mvpScore.toString().replace('.', ','))
-            $(`#podium [podium-name=${ index + 1 }]`).text(playersData[player.id].name)
+    getDetailMatchesPlayerLine (position, player) {
+        return `
+            <tr>
+                <th>${ position }º</th>
+                <th>${ playersData[player.id].name }</th>
+                <th>${ player.team.name }</th>
+                <th class="text-center">${ player.kills }</th>
+                <th class="text-center">${ player.deaths }</th>
+                <th class="text-center">${ player.assists }</th>
+                <th class="text-center">${ player.HSs }</th>
+                <th class="text-center">${ player.enemyHSs }</th>
+                <th class="text-center">${ player.mvps }</th>
+                <th class="text-center">${ player.utilityDamage }</th>
+                <th class="text-center">${ player.enemiesFlashed }</th>
+                <th class="text-center">${ player.kd }</th>
+                <th class="text-center">${ player.dmr }</th>
+                <th class="text-center">${ player.damage }</th>
+                <th class="text-center">${ player.objective }</th>
+                <th class="text-center">${ player.firstKills }</th>
+                <th class="text-center">${ player.Wins1v1 }</th>
+                <th class="text-center">${ player.Wins1v2 }</th>
+                <th class="text-center">${ player.knifeKills }</th>
+                <th class="text-center">${ player.enemy3Ks }</th>
+                <th class="text-center">${ player.enemy4Ks }</th>
+                <th class="text-center">${ player.enemy5Ks }</th>
+                <th class="text-center">${ player.equipmentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }</th>
+                <th class="text-center">${ formatLiveTime(player.liveTime) }</th>
+                <th class="text-center">${ player.score }</th>
+                <th class="text-center">${ player.mvpScore }</th>
+            </tr>
+        `
+    }
 
-            if (index + 1 <= 3) {
-                $(`#podium [podium-photo=${ index + 1 }]`).attr('src', `${ playersData[player.id].avatar }`)
+    getDetailScorePlayerLine (position, player) {
+        return `
+            <tr>
+                <th>${ position }º</th>
+                <th>${ playersData[player.id].name }</th>
+                <th>${ player.team.name }</th>
+                <th class="text-center">${ player.scoreKills }</th>
+                <th class="text-center">${ player.scoreDeaths }</th>
+                <th class="text-center">${ player.scoreAssists }</th>
+                <th class="text-center">${ player.scoreHS }</th>
+                <th class="text-center">${ player.scoreHighlights }</th>
+                <th class="text-center">${ player.scoreUtilityDamage }</th>
+                <th class="text-center">${ player.scoreEnemiesFlashed }</th>
+                <th class="text-center">${ player.scoreKD }</th>
+                <th class="text-center">${ player.scoreDamage }</th>
+                <th class="text-center">${ player.scoreFirstKills }</th>
+                <th class="text-center">${ player.score1v1 }</th>
+                <th class="text-center">${ player.score2v1 }</th>
+                <th class="text-center">${ player.score3Kills }</th>
+                <th class="text-center">${ player.score4Kills }</th>
+                <th class="text-center">${ player.score5Kills }</th>
+                <th class="text-center">${ player.scoreKnife }</th>
+                <th class="text-center">${ player.scoreKillsPistol }</th>
+                <th class="text-center">${ player.scoreKillsSniper }</th>
+                <th class="text-center">${ player.scoreRoundsWithoutDying }</th>
+                <th class="text-center">${ player.scoreTimeAlive }</th>
+                <th class="text-center">${ player.mvpScore }</th>
+            </tr>
+        `
+    }
+
+    updatePodium() {
+        $('table#detailsMatchesPlayers tbody').empty()
+        $('table#detailsScorePlayers tbody').empty()
+
+        this.matchSummary.forEach((player, index) => {
+            const position = index + 1
+
+            $(`#podium [podium-name=${ position }]`).text(playersData[player.id].name)
+            $(`#podium [podium-score=${ position }]`).text(player.mvpScore.toString().replace('.', ','))
+
+            if (position <= 3) {
+                $(`#podium [podium-photo=${ position }]`).attr('src', `${ playersData[player.id].avatar }`)
             }
+
+            $('table#detailsMatchesPlayers tbody').append(this.getDetailMatchesPlayerLine(position, player))
+            $('table#detailsScorePlayers tbody').append(this.getDetailScorePlayerLine(position, player))
         })
+
+        $('p.details-info').hide()
     }
 }
 
@@ -220,7 +298,6 @@ class Match {
                 <th class="text-center">${ player.enemy5Ks }</th>
                 <th class="text-center">${ player.equipmentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }</th>
                 <th class="text-center">${ player.minutesLive }</th>
-                <th class="text-center">${ player.score }</th>
             </tr>
         `).join('')
     }

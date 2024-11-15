@@ -3,21 +3,21 @@ const playersData = {
         name: 'arthur',
         avatar: 'assets/players/328904852.jpg',
     },
-    18641044: {
-        name: 'RAGE',
-        avatar: 'assets/players/18641044.jpg',
-    },
-    117951082: {
-        name: 'jz',
-        avatar: 'assets/players/117951082.jpg',
-    },
     178869262: {
-        name: 'JogadorGlobalizado',
+        name: 'RAGE',
         avatar: 'assets/players/178869262.jpg',
     },
     397076720: {
-        name: 'samuelruindadepura',
+        name: 'jz',
         avatar: 'assets/players/397076720.jpg',
+    },
+    18641044: {
+        name: 'JogadorGlobalizado',
+        avatar: 'assets/players/18641044.jpg',
+    },
+    117951082: {
+        name: 'samuelruindadepura',
+        avatar: 'assets/players/117951082.jpg',
     },
     1802275448: {
         name: 'y2kLuiis',
