@@ -45,7 +45,7 @@ $(document).ready(function () {
 
     }
 
-    $.get('../../templates/friendly/main.html', function (mainData) {
+    $.get(`${ relativePath }/templates/friendly/main.html`, function (mainData) {
         $('body').append(mainData)
 
         scripts.reduce((promise, script) => {
