@@ -23,7 +23,7 @@ function transformToRelative() {
         $('a[href]').each(function() {
             var currentHref = $(this).attr('href')
 
-            var newHref = `${ projectName }/${ currentHref }`
+            var newHref = `/${ projectName }/${ currentHref }`
 
             $(this).attr('href', newHref)
         })
