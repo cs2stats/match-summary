@@ -44,6 +44,8 @@ $(document).ready(function () {
 
     }
 
+    console.log(relativePath)
+
     $.get(`${ relativePath }/templates/friendly/main.html`, function (mainData) {
         $('body').append(mainData)
 
