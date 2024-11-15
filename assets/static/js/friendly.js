@@ -36,7 +36,6 @@ $(document).ready(function () {
                 matches.addMatch(content)
               })
 
-              transformToRelative()
               $('#highlights .highlight button').click()
             })
             .catch(error => {
@@ -52,6 +51,7 @@ $(document).ready(function () {
         }, Promise.resolve())
         .then(() => {
             readFiles()
+            transformToRelative()
         })
         .catch(error => {
             console.error(error.message)
