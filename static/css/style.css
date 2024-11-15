@@ -28,6 +28,10 @@ input[type="file"] {
     display: none;
 }
 
+a {
+    text-decoration: none;
+}
+
 #mvp_score {
     user-select: none;
 }
