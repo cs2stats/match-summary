@@ -41,10 +41,7 @@ $(document).ready(function () {
             .catch(error => {
               console.error('Erro ao ler os arquivos:', error)
             })
-
     }
-
-    console.log(relativePath)
 
     $.get(`${ relativePath }/templates/friendly/main.html`, function (mainData) {
         $('body').append(mainData)

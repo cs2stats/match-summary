@@ -15,8 +15,11 @@ function sortObjectByAttribute(obj, attribute, desc = true) {
 
 function transformToRelative() {
     const segments = window.location.pathname.substring(1).split('/').filter(segment => segment !== '')
+    const index = segments.indexOf('match-summary')
 
-    console.log(segments)
+    if (index !== -1) {
+        segments.splice(index, 1)
+    }
 
     return segments.length > 0 ? '../'.repeat(segments.length) : ''
 }
