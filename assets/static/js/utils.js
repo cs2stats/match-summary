@@ -20,6 +20,14 @@ function transformToRelative() {
     const index = segments.indexOf(projectName)
 
     if (index !== -1) {
+        $('a[href]').each(function() {
+            var currentHref = $(this).attr('href')
+
+            var newHref = `${ projectName }/${ currentHref }`
+
+            $(this).attr('href', newHref)
+        })
+
         return `/${ projectName }/`
     }
 
