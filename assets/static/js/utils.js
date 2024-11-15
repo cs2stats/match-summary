@@ -38,6 +38,8 @@ $(document).ready(function () {
         }
 
         relativePath = segments.length > 0 ? '../'.repeat(segments.length) : ''
+
+        console.log(relativePath)
     }
 
     transformToRelative()

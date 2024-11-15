@@ -51,7 +51,6 @@ $(document).ready(function () {
         }, Promise.resolve())
         .then(() => {
             readFiles()
-            transformToRelative()
         })
         .catch(error => {
             console.error(error.message)
