@@ -1,10 +1,10 @@
 $(document).ready(function () {
     const scripts = [
-        '/match-summary/assets/static/js/utils.js',
-        '/match-summary/assets/static/js/players.js',
-        '/match-summary/assets/static/js/mvp.js',
-        '/match-summary/assets/static/js/matches.js',
-        '/match-summary/assets/static/js/highlights.js',
+        '../../assets/static/js/utils.js',
+        '../../assets/static/js/players.js',
+        '../../assets/static/js/mvp.js',
+        '../../assets/static/js/matches.js',
+        '../../assets/static/js/highlights.js',
     ]
 
     function loadScript(src) {
@@ -19,7 +19,7 @@ $(document).ready(function () {
     }
 
     function readFiles () {
-        const fileList = Array.from({ length: fileCount }, (_, i) => `/match-summary/assets/static/friendlies/${ friendlyNumber }/${i + 1}.txt`)
+        const fileList = Array.from({ length: fileCount }, (_, i) => `../../assets/static/friendlies/${ friendlyNumber }/${i + 1}.txt`)
 
         const promises = fileList.map(file => 
             fetch(file)
@@ -45,7 +45,7 @@ $(document).ready(function () {
 
     }
 
-    $.get('/templates/friendly/main.html', function (mainData) {
+    $.get('../../templates/friendly/main.html', function (mainData) {
         $('body').append(mainData)
 
         scripts.reduce((promise, script) => {
