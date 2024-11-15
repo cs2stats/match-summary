@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    const defaultCover = '/assets/brand/cs-jackson.png'
+    const defaultCover = '/match-summary/assets/brand/cs-jackson.png'
     const conditions = ['worse', 'better']
 
     const highlightsElement = $('#highlights')
@@ -31,7 +31,7 @@ $(document).ready(function () {
             description: 'Mais mortes.',
             attribute: 'deaths',
             condition: conditions[1],
-            cover: '/assets/covers/f-batista.jpg',
+            cover: '/match-summary/assets/covers/f-batista.jpg',
         },
         {
             title: 'Herói da Agency',
@@ -45,14 +45,14 @@ $(document).ready(function () {
             description: 'Mais headshots (HSs).',
             attribute: 'HSs',
             condition: conditions[1],
-            cover: '/assets/covers/hs-batista.gif',
+            cover: '/match-summary/assets/covers/hs-batista.gif',
         },
         {
             title: 'Precisão Mortal',
             description: 'Mais %headshots (HSs).',
             attribute: 'enemyHSs',
             condition: conditions[1],
-            cover: '/assets/covers/hs-batista.gif',
+            cover: '/match-summary/assets/covers/hs-batista.gif',
         },
         {
             title: 'Padeiro',

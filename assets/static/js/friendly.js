@@ -1,10 +1,10 @@
 $(document).ready(function () {
     const scripts = [
-        '/static/js/utils.js',
-        '/static/js/players.js',
-        '/static/js/mvp.js',
-        '/static/js/matches.js',
-        '/static/js/highlights.js',
+        '/match-summary/assets/static/js/utils.js',
+        '/match-summary/assets/static/js/players.js',
+        '/match-summary/assets/static/js/mvp.js',
+        '/match-summary/assets/static/js/matches.js',
+        '/match-summary/assets/static/js/highlights.js',
     ]
 
     function loadScript(src) {
@@ -19,7 +19,7 @@ $(document).ready(function () {
     }
 
     function readFiles () {
-        const fileList = Array.from({ length: fileCount }, (_, i) => `/static/friendlies/${ friendlyNumber }/${i + 1}.txt`)
+        const fileList = Array.from({ length: fileCount }, (_, i) => `/match-summary/assets/static/friendlies/${ friendlyNumber }/${i + 1}.txt`)
 
         const promises = fileList.map(file => 
             fetch(file)
