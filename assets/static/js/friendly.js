@@ -36,6 +36,7 @@ $(document).ready(function () {
                 matches.addMatch(content)
               })
 
+              transformToRelative()
               $('#highlights .highlight button').click()
             })
             .catch(error => {

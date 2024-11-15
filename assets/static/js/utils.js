@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    let relativePath = ''
     const projectName = 'match-summary'
 
     function formatLiveTime (totalSeconds) {
@@ -36,14 +37,15 @@ $(document).ready(function () {
             return `/${ projectName }/`
         }
 
-        return segments.length > 0 ? '../'.repeat(segments.length) : ''
+        relativePath = segments.length > 0 ? '../'.repeat(segments.length) : ''
     }
 
-    const relativePath = transformToRelative()
+    transformToRelative()
 
     window.relativePath = relativePath
     window.formatLiveTime = formatLiveTime
     window.sortObjectByAttribute = sortObjectByAttribute
+    window.transformToRelative = transformToRelative
 })
 
 // function sortObjectByAttribute(obj, attribute, desc = true) {
