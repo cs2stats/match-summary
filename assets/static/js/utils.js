@@ -13,12 +13,10 @@ function sortObjectByAttribute(obj, attribute, desc = true) {
     })
 }
 
-function transformToRelative(path) {
-    // Conta o número de segmentos (divididos por '/'), ignorando a última barra vazia
+function transformToRelative() {
     const segments = window.location.pathname.substring(1).split('/').filter(segment => segment !== '')
-    
-    // Gera '../' para cada segmento
-    return '../'.repeat(segments.length)
+
+    return segments.length > 0 ? '../'.repeat(segments.length) : ''
 }
 
 const relativePath = transformToRelative()
