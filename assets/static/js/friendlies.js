@@ -37,7 +37,5 @@ $(document).ready(function () {
         const position = index + 1
 
         $('table tbody').append(createFriendlyLine(position, friendly))
-
-        transformToRelativePath()
     })
 })
