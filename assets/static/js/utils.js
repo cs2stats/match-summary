@@ -24,7 +24,7 @@ $(document).ready(function () {
 
             $(this).attr('href', newHref)
         })
-}
+    }
 
     function getRelativePath() {
         const segments = window.location.pathname.substring(1).split('/').filter(segment => segment !== '')
