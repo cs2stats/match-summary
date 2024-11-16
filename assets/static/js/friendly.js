@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    console.log(2)
     console.log('relativePath', relativePath)
 
     const scripts = [
@@ -24,12 +25,12 @@ $(document).ready(function () {
 
         const promises = fileList.map(file => 
             fetch(file)
-              .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Erro ao carregar ${file}: ${response.statusText}`)
-                }
-                return response.text()
-              })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Erro ao carregar ${file}: ${response.statusText}`)
+                    }
+                    return response.text()
+                })
           )
 
           Promise.all(promises)

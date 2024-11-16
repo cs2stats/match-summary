@@ -47,6 +47,8 @@ $(document).ready(function () {
 
     transformToRelative()
 
+    console.log(1, relativePath)
+
     window.relativePath = relativePath
     window.formatLiveTime = formatLiveTime
     window.sortObjectByAttribute = sortObjectByAttribute
