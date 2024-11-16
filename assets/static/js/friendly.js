@@ -1,7 +1,4 @@
 $(document).ready(function () {
-    console.log(2)
-    console.log('relativePath', relativePath)
-
     const scripts = [
         `${ relativePath }/assets/static/js/players.js`,
         `${ relativePath }/assets/static/js/mvp.js`,
@@ -54,6 +51,7 @@ $(document).ready(function () {
         }, Promise.resolve())
         .then(() => {
             readFiles()
+            transformToRelativePath()
         })
         .catch(error => {
             console.error(error.message)

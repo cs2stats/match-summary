@@ -17,12 +17,16 @@ $(document).ready(function () {
     }
 
     function transformToRelativePath () {
+        console.log('transformToRelativePath')
+
         $('a[href]').each(function() {
             var currentHref = $(this).attr('href')
 
-            console.log($(this), currentHref)
+            console.log('a', $(this), relativePath, currentHref)
 
-            var newHref = `/${ projectName }/${ currentHref }`
+            var newHref = `${ relativePath }${ currentHref }`
+
+            console.log(newHref)
 
             $(this).attr('href', newHref)
         })
@@ -36,6 +40,8 @@ $(document).ready(function () {
     }
 
     const relativePath = getRelativePath()
+
+    transformToRelativePath()
 
     console.log(1, relativePath)
 

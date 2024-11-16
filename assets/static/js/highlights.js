@@ -1,7 +1,4 @@
 $(document).ready(function () {
-    console.log(2)
-    console.log('relativePath', relativePath)
-
     const defaultCover = `${ relativePath }/assets/brand/cs-jackson.png`
     const conditions = ['worse', 'better']
 
