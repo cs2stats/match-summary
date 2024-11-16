@@ -1,8 +1,6 @@
 $(document).ready(function () {
     const projectName = 'match-summary'
 
-    let relativePath = ''
-
     function formatLiveTime (totalSeconds) {
         const minutes = Math.floor(totalSeconds / 60)
         const seconds = totalSeconds % 60
@@ -18,41 +16,33 @@ $(document).ready(function () {
         })
     }
 
-    function transformToRelative() {
+    function transformToRelativePath () {
+        $('a[href]').each(function() {
+            var currentHref = $(this).attr('href')
+
+            console.log($(this), currentHref)
+
+            var newHref = `/${ projectName }/${ currentHref }`
+
+            $(this).attr('href', newHref)
+        })
+}
+
+    function getRelativePath() {
         const segments = window.location.pathname.substring(1).split('/').filter(segment => segment !== '')
         const index = segments.indexOf(projectName)
 
-        console.log('segments', segments)
-
-        if (index !== -1) {
-            console.log($('a'), $('a[href]'))
-
-            $('a[href]').each(function() {
-                var currentHref = $(this).attr('href')
-
-                console.log($(this), currentHref)
-
-                var newHref = `/${ projectName }/${ currentHref }`
-
-                $(this).attr('href', newHref)
-            })
-
-            return `/${ projectName }/`
-        }
-
-        relativePath = segments.length > 0 ? '../'.repeat(segments.length) : ''
-
-        console.log('relativePath', relativePath)
+        return index !== -1 ? `/${ projectName }/` : ''
     }
 
-    transformToRelative()
+    const relativePath = getRelativePath()
 
     console.log(1, relativePath)
 
     window.relativePath = relativePath
     window.formatLiveTime = formatLiveTime
     window.sortObjectByAttribute = sortObjectByAttribute
-    window.transformToRelative = transformToRelative
+    window.transformToRelativePath = transformToRelativePath
 })
 
 // function sortObjectByAttribute(obj, attribute, desc = true) {
