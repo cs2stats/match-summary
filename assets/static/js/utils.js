@@ -24,7 +24,7 @@ $(document).ready(function () {
 
             console.log('a', $(this), relativePath, currentHref)
 
-            var newHref = `${ relativePath }/${ currentHref }`
+            var newHref = `${ relativePath }/${ currentHref !== '/' ? currentHref : '' }`
 
             console.log(newHref)
 
