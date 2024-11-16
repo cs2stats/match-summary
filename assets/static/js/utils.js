@@ -36,7 +36,7 @@ $(document).ready(function () {
         const segments = window.location.pathname.substring(1).split('/').filter(segment => segment !== '')
         const index = segments.indexOf(projectName)
 
-        return index !== -1 ? `/${ projectName }/` : ''
+        return index !== -1 ? `/${ projectName }` : ''
     }
 
     const relativePath = getRelativePath()
