@@ -1,9 +1,9 @@
 $(document).ready(function () {
     const scripts = [
-        '../../assets/static/js/players.js',
-        '../../assets/static/js/mvp.js',
-        '../../assets/static/js/matches.js',
-        '../../assets/static/js/highlights.js',
+        `${ relativePath }/assets/static/js/players.js`,
+        `${ relativePath }/assets/static/js/mvp.js`,
+        `${ relativePath }/assets/static/js/matches.js`,
+        `${ relativePath }/assets/static/js/highlights.js`,
     ]
 
     function loadScript(src) {
