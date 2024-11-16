@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    console.log('relativePath', relativePath)
+
     const scripts = [
         `${ relativePath }/assets/static/js/players.js`,
         `${ relativePath }/assets/static/js/mvp.js`,
@@ -24,7 +26,7 @@ $(document).ready(function () {
             fetch(file)
               .then(response => {
                 if (!response.ok) {
-                  throw new Error(`Erro ao carregar ${file}: ${response.statusText}`)
+                    throw new Error(`Erro ao carregar ${file}: ${response.statusText}`)
                 }
                 return response.text()
               })
@@ -32,14 +34,14 @@ $(document).ready(function () {
 
           Promise.all(promises)
             .then(contents => {
-              contents.forEach(content => {
-                matches.addMatch(content)
-              })
+                contents.forEach(content => {
+                  matches.addMatch(content)
+                })
 
-              $('#highlights .highlight button').click()
+                $('#highlights .highlight button').click()
             })
             .catch(error => {
-              console.error('Erro ao ler os arquivos:', error)
+                console.error('Erro ao ler os arquivos:', error)
             })
     }
 

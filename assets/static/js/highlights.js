@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    console.log('relativePath', relativePath)
+
     const defaultCover = `${ relativePath }/assets/brand/cs-jackson.png`
     const conditions = ['worse', 'better']
 
@@ -97,8 +99,8 @@ $(document).ready(function () {
             cover: defaultCover,
         },
         {
-            title: 'Balanceado e Letal',
-            description: 'Melhor V/M (Relação Vítimas/Mortes).',
+            title: 'Máquina Mortífera',
+            description: 'Melhor K/D (Relação Vítimas/Mortes).',
             attribute: 'kd',
             condition: conditions[1],
             cover: defaultCover,
