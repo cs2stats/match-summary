@@ -8,6 +8,10 @@ $(document).ready(function () {
         return `${minutes}:${String(seconds).padStart(2, '0')}`
     }
 
+    function formatTwoDecimalPlaces (num) {
+        return +(Math.round(num + "e+2")  + "e-2")
+    }
+
     function sortObjectByAttribute(obj, attribute, desc = true) {
         return Object.values(obj).sort((a, b) => {
             const valueA = a[attribute]
@@ -39,6 +43,7 @@ $(document).ready(function () {
 
     window.relativePath = relativePath
     window.formatLiveTime = formatLiveTime
+    window.formatTwoDecimalPlaces = formatTwoDecimalPlaces
     window.sortObjectByAttribute = sortObjectByAttribute
     window.transformToRelativePath = transformToRelativePath
 })

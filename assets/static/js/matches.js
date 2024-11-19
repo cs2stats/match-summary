@@ -10,6 +10,7 @@ $(document).ready(function () {
                 assignOnce: ['name', 'team'],
                 ignore: ['minutesLive'],
                 formatLast: ['liveTime'],
+                calculateAtTheEnd: ['enemyHSs', 'kd'],
             }
 
             this.createEvents(this)
@@ -105,7 +106,9 @@ $(document).ready(function () {
             const matchSummary = {}
         
             this.matches.forEach((match, matchIndex) => {
-                const isLastIteration = matchIndex === matches.length - 1
+                const isLastIteration = matchIndex === this.matches.length - 1
+
+                console.log(isLastIteration) //, this.matches.length, isLastIteration)
 
                 Object.values(match.teams).forEach(team => {
                     team.players.forEach(player => {
@@ -128,8 +131,22 @@ $(document).ready(function () {
                                 matchSummary[id][key] = parseFloat((matchSummary[id][key] + Number(value)).toFixed(2))
                             }
 
-                            if (isLastIteration && this.specialAttributes.formatLast.includes(key)) {
-                                matchSummary[id][key] = formatLiveTime(matchSummary[id][key])
+                            if (isLastIteration) {
+                                if (this.specialAttributes.formatLast.includes(key)) {
+                                    matchSummary[id][key] = formatLiveTime(matchSummary[id][key])
+                                }
+
+                                // console.log(this.specialAttributes.calculateAtTheEnd.includes(key))
+
+                                if (this.specialAttributes.calculateAtTheEnd.includes(key)) {
+                                    if (key === 'enemyHSs') {
+                                        matchSummary[id][key] = formatTwoDecimalPlaces((matchSummary[id]['HSs'] / matchSummary[id]['kills']) * 100)
+                                    }
+
+                                    if (key === 'kd') {
+                                        matchSummary[id][key] = formatTwoDecimalPlaces(matchSummary[id]['kills'] / matchSummary[id]['deaths'])
+                                    }
+                                }
                             }
                         }
                     })
@@ -329,10 +346,10 @@ $(document).ready(function () {
             this.name = data.name
             this.kills = data.kills
             this.deaths = data.deaths
-            this.kd = this.roundToTwo(data.kills / data.deaths)
+            this.kd = formatTwoDecimalPlaces(data.kills / data.deaths)
             this.assists = data.assists
             this.HSs = data.enemyHSs
-            this.enemyHSs = this.roundToTwo((data.enemyHSs / data.kills) * 100)
+            this.enemyHSs = formatTwoDecimalPlaces((data.enemyHSs / data.kills) * 100)
             this.mvps = data.mvps
             this.utilityDamage = data.MatchStats.Totals.UtilityDamage
             this.enemiesFlashed = data.MatchStats.Totals.EnemiesFlashed
@@ -345,7 +362,7 @@ $(document).ready(function () {
             this.pistolKills = data.kills_weapon_pistol
             this.SniperKills = data.kills_weapon_pistol
             this.clutchKs = data.clutchKs
-            this.dmr = this.roundToTwo((data.MatchStats.Totals.Damage / match.round))
+            this.dmr = formatTwoDecimalPlaces((data.MatchStats.Totals.Damage / match.round))
 
             this.Count1v1 = data.MatchStats.Totals['1v1Count']
             this.Wins1v1 = data.MatchStats.Totals['1v1Wins']
@@ -411,10 +428,6 @@ $(document).ready(function () {
                 this.scoreRoundsWithoutDying +
                 this.scoreTimeAlive
             ).toFixed(2)
-        }
-
-        roundToTwo (num) {
-            return +(Math.round(num + "e+2")  + "e-2")
         }
     }
 
