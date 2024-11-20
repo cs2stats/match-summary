@@ -47,16 +47,25 @@ a {
     filter: blur(.4rem);
 }
 
-#podium table th {
-    width: 10px;
-}
-
-thead tr th:first-child,
-tbody tr td:first-child {
+table thead tr th:first-child,
+table tbody tr td:first-child {
   width: 10em;
   min-width: 10em;
   max-width: 10em;
   word-break: break-all;
+}
+
+#podium table thead tr th:first-child,
+#podium table tbody tr td:first-child,
+#detailsMatchesPlayers thead tr th:first-child,
+#detailsMatchesPlayers tbody tr td:first-child,
+#detailsScorePlayers thead tr th:first-child,
+#detailsScorePlayers tbody tr td:first-child {
+    width: 10px !important;
+    width: 10px !important;
+    min-width: 10px !important;
+    max-width: 10px !important;
+    word-break: break-all;
 }
 
 @media (min-width: 768px) {
