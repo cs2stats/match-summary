@@ -130,35 +130,18 @@ $(document).ready(function () {
                 })
             })
 
-            for (const [id, player] of Object.entries(matchSummary)) {
-                console.log(id, player)
-                
+            for (const [id, player] of Object.entries(matchSummary)) {                
                 this.specialAttributes.calculateAtTheEnd.forEach(key => {
                     switch (key) {
                         case 'enemyHSs':
                             player[key] = formatTwoDecimalPlaces((player.HSs / player.kills) * 100)
                             break
-
                         case 'kd':
                             player[key] = formatTwoDecimalPlaces(player.kills / player.deaths)
                             break
-
                         default:
                             break
                     }
-
-                    // if (key === 'liveTime') {
-                    //     console.log()
-                    //     matchSummary[id][key] = formatLiveTime(matchSummary[id][key])
-                    // }
-
-                    // if (key === 'enemyHSs') {
-                    //     matchSummary[id][key] = formatTwoDecimalPlaces((matchSummary[id]['HSs'] / matchSummary[id]['kills']) * 100)
-                    // }
-
-                    // if (key === 'kd') {
-                    //     matchSummary[id][key] = formatTwoDecimalPlaces(matchSummary[id]['kills'] / matchSummary[id]['deaths'])
-                    // }
                 })
             }
 
@@ -274,10 +257,15 @@ $(document).ready(function () {
             this.name = `Partida ${ number }`
             this.data = data
 
+            this.roundResultTeam1 = data['FirstHalfScore']['team1'] + data['SecondHalfScore']['team1']
+            this.roundResultTeam2 = data['FirstHalfScore']['team2'] + data['SecondHalfScore']['team2']
+
             this.teams = [
                 new Team('1', data),
                 new Team('2', data)
             ]
+
+            this.result = `${ this.teams[0].name } <b>${ this.roundResultTeam1 }:${ this.roundResultTeam2 }</b> ${ this.teams[1].name }`
 
             this.createMatchSection(this)
         }
@@ -286,10 +274,13 @@ $(document).ready(function () {
             $.get(`${ relativePath }/templates/match.html`, function(matchData) {
                 matchData = matchData.replace('{{matchId}}', self.id)
                 matchData = matchData.replace('{{matchName}}', self.name)
+                matchData = matchData.replace('{{matchResult}}', self.result)
             
                 const teamPromises = Array(2).fill(0).map((_, i) => {
                     return $.get(`${ relativePath }/templates/team.html`).then(function(teamData) {
                         teamData = teamData.replace('{{teamName}}', `${self.teams[i].name}`)
+                        teamData = teamData.replace('{{firstHalfScore}}', `${self.teams[i].firstHalfScore}`)
+                        teamData = teamData.replace('{{secondHalfScore}}', `${self.teams[i].secondHalfScore}`)
                         teamData = teamData.replace('{{players}}', self.getPlayersByTeam(self.teams[i]))
             
                         return teamData
@@ -342,6 +333,8 @@ $(document).ready(function () {
         constructor (reference, data) {
             this.reference = reference
             this.name = data[`team${ reference}`]
+            this.firstHalfScore = data['FirstHalfScore'][`team${ reference}`]
+            this.secondHalfScore = data['SecondHalfScore'][`team${ reference}`]
             this.players = Object.entries(data[`PlayersOnTeam${ reference }`]).map(([key, value]) => {
                 return new Player(this, value, data)
             })

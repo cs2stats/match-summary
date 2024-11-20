@@ -245,7 +245,9 @@ $(document).ready(function () {
             if (player[attribute] > 0) {
                 highlight.find('img').attr('src', playersData[player.id].avatar)
                 highlight.find('.card-body').append(`
-                    <p><b>Resultado</b>: ${ playersData[player.id].name } com ${ player[attribute] }.</p>
+                    <p><b>Resultado</b>: ${ playersData[player.id].name } com ${
+                        attribute === 'liveTime' ? formatLiveTime(player[attribute]) : player[attribute]
+                    }.</p>
                 `)
             } else {
                 highlight.find('img').attr('src',  `${ relativePath }/assets/brand/cs2-sad.png`)
