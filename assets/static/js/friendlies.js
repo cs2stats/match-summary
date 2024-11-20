@@ -23,7 +23,7 @@ $(document).ready(function () {
     function createFriendlyLine(position, friendly) {
         return `<tr>
             <th scope="row">${ position }</th>
-            <td><a href='/friendlies/${ position }'>${ friendly.name } <i class="bi bi-box-arrow-up-right"></i></a></td>
+            <td><a href='friendlies/${ position }'>${ friendly.name } <i class="bi bi-box-arrow-up-right"></i></a></td>
             <td>${ friendly.date }</td>
             <td>${ friendly.team1 }</td>
             <td>${ friendly.team2 }</td>

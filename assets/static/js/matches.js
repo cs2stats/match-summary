@@ -143,6 +143,54 @@ $(document).ready(function () {
                             break
                     }
                 })
+
+                // Score
+
+                player.scoreKills = calculateMvpScoreByAttribute('kills', player.kills)
+                player.scoreDeaths = calculateMvpScoreByAttribute('deaths', player.deaths)
+                player.scoreAssists = calculateMvpScoreByAttribute('assists', player.assists)
+                player.scoreKD = calculateMvpScoreByAttribute('kd', player.kd)
+                player.scoreObjective = calculateMvpScoreByAttribute('objective', player.objective)
+                player.scoreHighlights = calculateMvpScoreByAttribute('mvps', player.mvps)
+                player.scoreDamage = calculateMvpScoreByAttribute('damage', player.damage)
+                player.scoreHS = calculateMvpScoreByAttribute('enemyHSs', player.enemyHSs)
+                player.scoreUtilityDamage = calculateMvpScoreByAttribute('utilityDamage', player.utilityDamage)
+                player.scoreEnemiesFlashed = calculateMvpScoreByAttribute('enemiesFlashed', player.enemiesFlashed)
+                player.scoreFirstKills = calculateMvpScoreByAttribute('firstKs', player.firstKills)
+                player.score1v1 = calculateMvpScoreByAttribute('Count1v1', player.Count1v1)
+                player.score1v2 = calculateMvpScoreByAttribute('Count1v1', player.Count1v2)
+                player.score3Kills = calculateMvpScoreByAttribute('enemy3Ks', player.enemy3Ks)
+                player.score4Kills = calculateMvpScoreByAttribute('enemy4Ks', player.enemy4Ks)
+                player.score5Kills = calculateMvpScoreByAttribute('enemy5Ks', player.enemy5Ks)
+                player.scoreKnife = calculateMvpScoreByAttribute('killsKnife', player.knifeKills)
+                player.scoreKillsPistol = calculateMvpScoreByAttribute('killsPistol', player.pistolKills)
+                player.scoreKillsSniper = calculateMvpScoreByAttribute('killsSniper', player.SniperKills)
+                player.scoreRoundsWithoutDying = calculateMvpScoreByAttribute('roundWithoutDying', player.roundWithoutDying)
+                player.scoreTimeAlive = calculateMvpScoreByAttribute('liveTime', player.liveTime)
+
+                player.mvpScore = (
+                    player.scoreKills +
+                    player.scoreDeaths +
+                    player.scoreAssists +
+                    player.scoreKD +
+                    player.scoreObjective +
+                    player.scoreHighlights +
+                    player.scoreDamage +
+                    player.scoreHS +
+                    player.scoreUtilityDamage +
+                    player.scoreEnemiesFlashed +
+                    player.scoreFirstKills +
+                    player.score1v1 +
+                    player.score1v2 +
+                    player.score3Kills +
+                    player.score4Kills +
+                    player.score5Kills +
+                    player.scoreKnife +
+                    player.scoreKillsPistol +
+                    player.scoreKillsSniper +
+                    player.scoreRoundsWithoutDying +
+                    player.scoreTimeAlive
+                ).toFixed(2)
             }
 
             this.setMatchSummary(matchSummary)
@@ -380,56 +428,57 @@ $(document).ready(function () {
             this.entryCount = data.MatchStats.Totals.EntryCount
             this.entryWins = data.MatchStats.Totals.EntryWins
             this.equipmentValue = data.MatchStats.Totals.EquipmentValue
+            this.roundWithoutDying = match.round - data.deaths
             this.liveTime = data.MatchStats.Totals.LiveTime
             this.minutesLive = formatLiveTime(data.MatchStats.Totals.LiveTime)
 
-            // Score
+            // // Score
 
-            this.scoreKills = calculateMvpScoreByAttribute('kills', data.kills)
-            this.scoreDeaths = calculateMvpScoreByAttribute('deaths', data.deaths)
-            this.scoreAssists = calculateMvpScoreByAttribute('assists', data.assists)
-            this.scoreKD = calculateMvpScoreByAttribute('kd', this.kd)
-            this.scoreObjective = calculateMvpScoreByAttribute('objective', this.objective)
-            this.scoreHighlights = calculateMvpScoreByAttribute('mvps', data.mvps)
-            this.scoreDamage = calculateMvpScoreByAttribute('damage', this.damage)
-            this.scoreHS = calculateMvpScoreByAttribute('enemyHSs', this.enemyHSs)
-            this.scoreUtilityDamage = calculateMvpScoreByAttribute('utilityDamage', this.utilityDamage)
-            this.scoreEnemiesFlashed = calculateMvpScoreByAttribute('enemiesFlashed', this.enemiesFlashed)
-            this.scoreFirstKills = calculateMvpScoreByAttribute('firstKs', data.firstKs)
-            this.score1v1 = calculateMvpScoreByAttribute('Count1v1', this.Count1v1)
-            this.score1v2 = calculateMvpScoreByAttribute('Count1v1', this.Count1v2)
-            this.score3Kills = calculateMvpScoreByAttribute('enemy3Ks', this.enemy3Ks)
-            this.score4Kills = calculateMvpScoreByAttribute('enemy4Ks', this.enemy4Ks)
-            this.score5Kills = calculateMvpScoreByAttribute('enemy5Ks', this.enemy5Ks)
-            this.scoreKnife = calculateMvpScoreByAttribute('killsKnife', data.kills_knife)
-            this.scoreKillsPistol = calculateMvpScoreByAttribute('killsPistol', data.kills_weapon_pistol)
-            this.scoreKillsSniper = calculateMvpScoreByAttribute('killsSniper', data.kills_weapon_sniper)
-            this.scoreRoundsWithoutDying = calculateMvpScoreByAttribute('roundWithoutDying', (match.round - data.deaths))
-            this.scoreTimeAlive = calculateMvpScoreByAttribute('liveTime', this.liveTime)
+            // this.scoreKills = calculateMvpScoreByAttribute('kills', data.kills)
+            // this.scoreDeaths = calculateMvpScoreByAttribute('deaths', data.deaths)
+            // this.scoreAssists = calculateMvpScoreByAttribute('assists', data.assists)
+            // this.scoreKD = calculateMvpScoreByAttribute('kd', this.kd)
+            // this.scoreObjective = calculateMvpScoreByAttribute('objective', this.objective)
+            // this.scoreHighlights = calculateMvpScoreByAttribute('mvps', data.mvps)
+            // this.scoreDamage = calculateMvpScoreByAttribute('damage', this.damage)
+            // this.scoreHS = calculateMvpScoreByAttribute('enemyHSs', this.enemyHSs)
+            // this.scoreUtilityDamage = calculateMvpScoreByAttribute('utilityDamage', this.utilityDamage)
+            // this.scoreEnemiesFlashed = calculateMvpScoreByAttribute('enemiesFlashed', this.enemiesFlashed)
+            // this.scoreFirstKills = calculateMvpScoreByAttribute('firstKs', data.firstKs)
+            // this.score1v1 = calculateMvpScoreByAttribute('Count1v1', this.Count1v1)
+            // this.score1v2 = calculateMvpScoreByAttribute('Count1v1', this.Count1v2)
+            // this.score3Kills = calculateMvpScoreByAttribute('enemy3Ks', this.enemy3Ks)
+            // this.score4Kills = calculateMvpScoreByAttribute('enemy4Ks', this.enemy4Ks)
+            // this.score5Kills = calculateMvpScoreByAttribute('enemy5Ks', this.enemy5Ks)
+            // this.scoreKnife = calculateMvpScoreByAttribute('killsKnife', data.kills_knife)
+            // this.scoreKillsPistol = calculateMvpScoreByAttribute('killsPistol', data.kills_weapon_pistol)
+            // this.scoreKillsSniper = calculateMvpScoreByAttribute('killsSniper', data.kills_weapon_sniper)
+            // this.scoreRoundsWithoutDying = calculateMvpScoreByAttribute('roundWithoutDying', (match.round - data.deaths))
+            // this.scoreTimeAlive = calculateMvpScoreByAttribute('liveTime', this.liveTime)
 
-            this.mvpScore = (
-                this.scoreKills +
-                this.scoreDeaths +
-                this.scoreAssists +
-                this.scoreKD +
-                this.scoreObjective +
-                this.scoreHighlights +
-                this.scoreDamage +
-                this.scoreHS +
-                this.scoreUtilityDamage +
-                this.scoreEnemiesFlashed +
-                this.scoreFirstKills +
-                this.score1v1 +
-                this.score1v2 +
-                this.score3Kills +
-                this.score4Kills +
-                this.score5Kills +
-                this.scoreKnife +
-                this.scoreKillsPistol +
-                this.scoreKillsSniper +
-                this.scoreRoundsWithoutDying +
-                this.scoreTimeAlive
-            ).toFixed(2)
+            // this.mvpScore = (
+            //     this.scoreKills +
+            //     this.scoreDeaths +
+            //     this.scoreAssists +
+            //     this.scoreKD +
+            //     this.scoreObjective +
+            //     this.scoreHighlights +
+            //     this.scoreDamage +
+            //     this.scoreHS +
+            //     this.scoreUtilityDamage +
+            //     this.scoreEnemiesFlashed +
+            //     this.scoreFirstKills +
+            //     this.score1v1 +
+            //     this.score1v2 +
+            //     this.score3Kills +
+            //     this.score4Kills +
+            //     this.score5Kills +
+            //     this.scoreKnife +
+            //     this.scoreKillsPistol +
+            //     this.scoreKillsSniper +
+            //     this.scoreRoundsWithoutDying +
+            //     this.scoreTimeAlive
+            // ).toFixed(2)
         }
     }
 

@@ -1,6 +1,6 @@
 $(document).ready(function () {
     function calculateMvpScoreByAttribute (attribute, value) {
-        return mvpScores[mvpVersion][attribute] !== undefined ? mvpScores[mvpVersion][attribute].calculate(value) : 0
+        return mvpScores[mvpVersion][attribute] !== undefined ? formatTwoDecimalPlaces(mvpScores[mvpVersion][attribute].calculate(value)) : 0
     }
 
     $('#mvpVersion').text(`Versão ${ mvpVersion }`)
