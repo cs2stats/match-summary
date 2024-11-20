@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    const projectName = 'match-summary'
-
     function formatLiveTime (totalSeconds) {
         const minutes = Math.floor(totalSeconds / 60)
         const seconds = totalSeconds % 60
@@ -33,15 +31,6 @@ $(document).ready(function () {
             $(this).attr('href', newHref)
         })
     }
-
-    function getRelativePath() {
-        const segments = window.location.pathname.substring(1).split('/').filter(segment => segment !== '')
-        const index = segments.indexOf(projectName)
-
-        return index !== -1 ? `/${ projectName }` : ''
-    }
-
-    const relativePath = getRelativePath()
 
     transformToRelativePath()
 

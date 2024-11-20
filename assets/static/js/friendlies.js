@@ -6,7 +6,7 @@ $(document).ready(function () {
             'team1': 'Time 1',
             'team2': 'Time A',
             'mvp': 'arthur',
-            'lvp': 'RAGE',
+            'lvp': 'RkHunter',
             'result': '1:1',
         },
         {
@@ -23,13 +23,13 @@ $(document).ready(function () {
     function createFriendlyLine(position, friendly) {
         return `<tr>
             <th scope="row">${ position }</th>
-            <td><a href='friendlies/${ position }'>${ friendly.name } <i class="bi bi-box-arrow-up-right"></i></a></td>
+            <td><a href='/friendlies/${ position }'>${ friendly.name } <i class="bi bi-box-arrow-up-right"></i></a></td>
             <td>${ friendly.date }</td>
             <td>${ friendly.team1 }</td>
             <td>${ friendly.team2 }</td>
+            <td>${ friendly.result }</td>
             <td>${ friendly.mvp }</td>
             <td>${ friendly.lvp }</td>
-            <td>${ friendly.result }</td>
         </tr>`
     }
 

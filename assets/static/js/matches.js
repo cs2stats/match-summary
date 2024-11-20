@@ -215,7 +215,7 @@ $(document).ready(function () {
                     <th class="text-center">${ formatDecimal(player.scoreDamage) }</th>
                     <th class="text-center">${ formatDecimal(player.scoreFirstKills) }</th>
                     <th class="text-center">${ formatDecimal(player.score1v1) }</th>
-                    <th class="text-center">${ formatDecimal(player.score2v1) }</th>
+                    <th class="text-center">${ formatDecimal(player.score1v2) }</th>
                     <th class="text-center">${ formatDecimal(player.score3Kills) }</th>
                     <th class="text-center">${ formatDecimal(player.score4Kills) }</th>
                     <th class="text-center">${ formatDecimal(player.score5Kills) }</th>
@@ -385,27 +385,27 @@ $(document).ready(function () {
 
             // Score
 
-            this.scoreKills = data.kills * 1 // Vítimas
-            this.scoreDeaths = data.deaths * -0.5 // Mortes
-            this.scoreAssists = data.assists * 0.5 // Assistências
-            this.scoreKD = this.kd * 2 // KD
-            this.scoreObjective = this.objective * 2 // Destaques
-            this.scoreHighlights = data.mvps * 2 // Destaques
-            this.scoreDamage = this.damage / 100 // Dano
-            this.scoreHS = this.enemyHSs * 0.1 // % HS
-            this.scoreUtilityDamage = (this.utilityDamage / 10) * 0.1 // Dano com utilitário
-            this.scoreEnemiesFlashed = this.enemiesFlashed * 0.1 // Inimigo cego
-            this.scoreFirstKills = data.firstKs * 0.5 // Primeira eliminação do round
-            this.score1v1 = this.Count1v1 * 1 //1x1
-            this.score2v1 = this.Count1v1 * 2 //2x1
-            this.score3Kills = this.enemy3Ks * 1 // 3 Eliminações no round
-            this.score4Kills = this.enemy4Ks * 3 // 4 Eliminações no round
-            this.score5Kills = this.enemy5Ks * 5 // 5 Eliminações no round
-            this.scoreKnife = data.kills_knife * 5 // Eliminação com Faca
-            this.scoreKillsPistol = data.kills_weapon_pistol * 0.5 // Eliminações com Pistola
-            this.scoreKillsSniper = data.kills_weapon_sniper * 0.25 // Eliminações com Sniper
-            this.scoreRoundsWithoutDying = match.round - data.deaths // Rounds sem morrer
-            this.scoreTimeAlive = (this.liveTime / 60) * 1 // Tempo vivo
+            this.scoreKills = calculateMvpScoreByAttribute('kills', data.kills)
+            this.scoreDeaths = calculateMvpScoreByAttribute('deaths', data.deaths)
+            this.scoreAssists = calculateMvpScoreByAttribute('assists', data.assists)
+            this.scoreKD = calculateMvpScoreByAttribute('kd', this.kd)
+            this.scoreObjective = calculateMvpScoreByAttribute('objective', this.objective)
+            this.scoreHighlights = calculateMvpScoreByAttribute('mvps', data.mvps)
+            this.scoreDamage = calculateMvpScoreByAttribute('damage', this.damage)
+            this.scoreHS = calculateMvpScoreByAttribute('enemyHSs', this.enemyHSs)
+            this.scoreUtilityDamage = calculateMvpScoreByAttribute('utilityDamage', this.utilityDamage)
+            this.scoreEnemiesFlashed = calculateMvpScoreByAttribute('enemiesFlashed', this.enemiesFlashed)
+            this.scoreFirstKills = calculateMvpScoreByAttribute('firstKs', data.firstKs)
+            this.score1v1 = calculateMvpScoreByAttribute('Count1v1', this.Count1v1)
+            this.score1v2 = calculateMvpScoreByAttribute('Count1v1', this.Count1v2)
+            this.score3Kills = calculateMvpScoreByAttribute('enemy3Ks', this.enemy3Ks)
+            this.score4Kills = calculateMvpScoreByAttribute('enemy4Ks', this.enemy4Ks)
+            this.score5Kills = calculateMvpScoreByAttribute('enemy5Ks', this.enemy5Ks)
+            this.scoreKnife = calculateMvpScoreByAttribute('killsKnife', data.kills_knife)
+            this.scoreKillsPistol = calculateMvpScoreByAttribute('killsPistol', data.kills_weapon_pistol)
+            this.scoreKillsSniper = calculateMvpScoreByAttribute('killsSniper', data.kills_weapon_sniper)
+            this.scoreRoundsWithoutDying = calculateMvpScoreByAttribute('roundWithoutDying', (match.round - data.deaths))
+            this.scoreTimeAlive = calculateMvpScoreByAttribute('liveTime', this.liveTime)
 
             this.mvpScore = (
                 this.scoreKills +
@@ -420,7 +420,7 @@ $(document).ready(function () {
                 this.scoreEnemiesFlashed +
                 this.scoreFirstKills +
                 this.score1v1 +
-                this.score2v1 +
+                this.score1v2 +
                 this.score3Kills +
                 this.score4Kills +
                 this.score5Kills +
