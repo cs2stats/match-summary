@@ -75,6 +75,24 @@ table tbody tr td:first-child {
     word-break: break-all;
 }
 
+@media (max-width: 768px) {
+    .px-5 {
+        padding: 0 !important;
+    }
+
+    #podium .container {
+        padding: 0;
+    }
+
+    table {
+        position: relative;
+        overflow-x: auto;
+        display: block;
+        max-width: fit-content;
+        white-space: nowrap;
+    }
+}
+
 @media (min-width: 768px) {
     .bd-placeholder-img-lg {
       font-size: 3.5rem;
