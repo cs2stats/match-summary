@@ -12,6 +12,10 @@ $(document).ready(function () {
         return +(Math.round(num + "e+2")  + "e-2")
     }
 
+    function formatDecimal (num) {
+        return num.toString().replace('.', ',')
+    }
+
     function sortObjectByAttribute(obj, attribute, desc = true) {
         return Object.values(obj).sort((a, b) => {
             const valueA = a[attribute]
@@ -43,6 +47,7 @@ $(document).ready(function () {
 
     window.relativePath = relativePath
     window.formatLiveTime = formatLiveTime
+    window.formatDecimal = formatDecimal
     window.formatTwoDecimalPlaces = formatTwoDecimalPlaces
     window.sortObjectByAttribute = sortObjectByAttribute
     window.transformToRelativePath = transformToRelativePath

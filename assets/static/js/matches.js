@@ -9,8 +9,7 @@ $(document).ready(function () {
             this.specialAttributes = {
                 assignOnce: ['name', 'team'],
                 ignore: ['minutesLive'],
-                formatLast: ['liveTime'],
-                calculateAtTheEnd: ['enemyHSs', 'kd'],
+                calculateAtTheEnd: ['kd', 'enemyHSs'],
             }
 
             this.createEvents(this)
@@ -106,10 +105,6 @@ $(document).ready(function () {
             const matchSummary = {}
         
             this.matches.forEach((match, matchIndex) => {
-                const isLastIteration = matchIndex === this.matches.length - 1
-
-                console.log(isLastIteration) //, this.matches.length, isLastIteration)
-
                 Object.values(match.teams).forEach(team => {
                     team.players.forEach(player => {
                         const { id, name, ...stats } = player
@@ -130,28 +125,42 @@ $(document).ready(function () {
                             } else {
                                 matchSummary[id][key] = parseFloat((matchSummary[id][key] + Number(value)).toFixed(2))
                             }
-
-                            if (isLastIteration) {
-                                if (this.specialAttributes.formatLast.includes(key)) {
-                                    matchSummary[id][key] = formatLiveTime(matchSummary[id][key])
-                                }
-
-                                // console.log(this.specialAttributes.calculateAtTheEnd.includes(key))
-
-                                if (this.specialAttributes.calculateAtTheEnd.includes(key)) {
-                                    if (key === 'enemyHSs') {
-                                        matchSummary[id][key] = formatTwoDecimalPlaces((matchSummary[id]['HSs'] / matchSummary[id]['kills']) * 100)
-                                    }
-
-                                    if (key === 'kd') {
-                                        matchSummary[id][key] = formatTwoDecimalPlaces(matchSummary[id]['kills'] / matchSummary[id]['deaths'])
-                                    }
-                                }
-                            }
                         }
                     })
                 })
             })
+
+            for (const [id, player] of Object.entries(matchSummary)) {
+                console.log(id, player)
+                
+                this.specialAttributes.calculateAtTheEnd.forEach(key => {
+                    switch (key) {
+                        case 'enemyHSs':
+                            player[key] = formatTwoDecimalPlaces((player.HSs / player.kills) * 100)
+                            break
+
+                        case 'kd':
+                            player[key] = formatTwoDecimalPlaces(player.kills / player.deaths)
+                            break
+
+                        default:
+                            break
+                    }
+
+                    // if (key === 'liveTime') {
+                    //     console.log()
+                    //     matchSummary[id][key] = formatLiveTime(matchSummary[id][key])
+                    // }
+
+                    // if (key === 'enemyHSs') {
+                    //     matchSummary[id][key] = formatTwoDecimalPlaces((matchSummary[id]['HSs'] / matchSummary[id]['kills']) * 100)
+                    // }
+
+                    // if (key === 'kd') {
+                    //     matchSummary[id][key] = formatTwoDecimalPlaces(matchSummary[id]['kills'] / matchSummary[id]['deaths'])
+                    // }
+                })
+            }
 
             this.setMatchSummary(matchSummary)
         }
@@ -211,28 +220,28 @@ $(document).ready(function () {
                     <th>${ position }º</th>
                     <th>${ playersData[player.id].name }</th>
                     <th>${ player.team.name }</th>
-                    <th class="text-center">${ player.scoreKills }</th>
-                    <th class="text-center">${ player.scoreDeaths }</th>
-                    <th class="text-center">${ player.scoreAssists }</th>
-                    <th class="text-center">${ player.scoreKD }</th>
-                    <th class="text-center">${ player.scoreObjective }</th>
-                    <th class="text-center">${ player.scoreHighlights }</th>
-                    <th class="text-center">${ player.scoreHS }</th>
-                    <th class="text-center">${ player.scoreUtilityDamage }</th>
-                    <th class="text-center">${ player.scoreEnemiesFlashed }</th>
-                    <th class="text-center">${ player.scoreDamage }</th>
-                    <th class="text-center">${ player.scoreFirstKills }</th>
-                    <th class="text-center">${ player.score1v1 }</th>
-                    <th class="text-center">${ player.score2v1 }</th>
-                    <th class="text-center">${ player.score3Kills }</th>
-                    <th class="text-center">${ player.score4Kills }</th>
-                    <th class="text-center">${ player.score5Kills }</th>
-                    <th class="text-center">${ player.scoreKnife }</th>
-                    <th class="text-center">${ player.scoreKillsPistol }</th>
-                    <th class="text-center">${ player.scoreKillsSniper }</th>
-                    <th class="text-center">${ player.scoreRoundsWithoutDying }</th>
-                    <th class="text-center">${ player.scoreTimeAlive }</th>
-                    <th class="text-center">${ player.mvpScore }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreKills) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreDeaths) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreAssists) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreKD) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreObjective) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreHighlights) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreHS) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreUtilityDamage) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreEnemiesFlashed) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreDamage) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreFirstKills) }</th>
+                    <th class="text-center">${ formatDecimal(player.score1v1) }</th>
+                    <th class="text-center">${ formatDecimal(player.score2v1) }</th>
+                    <th class="text-center">${ formatDecimal(player.score3Kills) }</th>
+                    <th class="text-center">${ formatDecimal(player.score4Kills) }</th>
+                    <th class="text-center">${ formatDecimal(player.score5Kills) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreKnife) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreKillsPistol) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreKillsSniper) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreRoundsWithoutDying) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreTimeAlive) }</th>
+                    <th class="text-center">${ formatDecimal(player.mvpScore) }</th>
                 </tr>
             `
         }
@@ -245,7 +254,7 @@ $(document).ready(function () {
                 const position = index + 1
 
                 $(`#podium [podium-name=${ position }]`).text(playersData[player.id].name)
-                $(`#podium [podium-score=${ position }]`).text(player.mvpScore.toString().replace('.', ','))
+                $(`#podium [podium-score=${ position }]`).text(formatDecimal(player.mvpScore))
 
                 if (position <= 3) {
                     $(`#podium [podium-photo=${ position }]`).attr('src', `${ playersData[player.id].avatar }`)
