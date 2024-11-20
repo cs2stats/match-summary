@@ -13,11 +13,11 @@ $(document).ready(function () {
             avatar: `${ relativePath }/assets/players/397076720.jpg`,
         },
         18641044: {
-            name: 'JogadorGlobalizado',
+            name: 'Jogador Globalizado',
             avatar: `${ relativePath }/assets/players/18641044.jpg`,
         },
         117951082: {
-            name: 'samuelruindadepura',
+            name: 'samuel ruindade pura',
             avatar: `${ relativePath }/assets/players/117951082.jpg`,
         },
         1802275448: {
@@ -29,7 +29,7 @@ $(document).ready(function () {
             avatar: `${ relativePath }/assets/players/178936009.jpg`,
         },
         183337714: {
-            name: 'EuSouoDudu',
+            name: 'Eu Sou o Dudu',
             avatar: `${ relativePath }/assets/players/183337714.gif`,
         },
         186585363: {
