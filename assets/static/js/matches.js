@@ -362,7 +362,7 @@ $(document).ready(function () {
             this.firstKills = data.firstKs
             this.knifeKills = data.kills_knife
             this.pistolKills = data.kills_weapon_pistol
-            this.SniperKills = data.kills_weapon_pistol
+            this.SniperKills = data.kills_weapon_sniper
             this.clutchKs = data.clutchKs
             this.dmr = formatTwoDecimalPlaces((data.MatchStats.Totals.Damage / match.round))
 
