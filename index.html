@@ -13,6 +13,8 @@
         <link href="assets/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="assets/static/css/podium.css" rel="stylesheet">
         <link href="assets/static/css/style.css" rel="stylesheet">
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
     </head>
 
     <body>
@@ -69,7 +71,7 @@
             <div class="px-4 pt-5 my-5">
                 <h1 class="display-4 fw-bold text-center mb-5">Destaques (ou não)</h1>
 
-                <div id="highlights" class="row row-cols-1 row-cols-md-4 g-3">
+                <div id="highlights" class="row g-3">
                 </div>
             </div>
 
@@ -235,6 +237,26 @@
             <div class="b-example-divider mb-0"></div>
         </main>
     </body>
+
+    <div id="modal-award" class="modal" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🎁 Prêmio</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+
+                <div class="modal-body d-flex justify-content-center flex-column text-center">
+                    <p class="description"></p>
+                    <img src="" class="rounded mx-auto d-block" width="300">
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>

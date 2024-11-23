@@ -75,6 +75,28 @@ table tbody tr td:first-child {
     word-break: break-all;
 }
 
+img.cover {
+    z-index: 2;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #2a357f;
+    border-color: #2a357f;
+}
+
+.btn-primary:hover {
+    color: #29367d;
+    background-color: #FFF;
+    border-color: #29367d;
+}
+
+.btn-outline-dark:hover {
+    color: #fff;
+    background-color: #29367d;
+    border-color: #29367d;
+}
+
 @media (max-width: 768px) {
     .px-5 {
         padding: 0 !important;
