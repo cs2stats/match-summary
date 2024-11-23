@@ -3,7 +3,7 @@
     align-items: flex-end;
 }
 
-.podium {  
+.podium {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -84,7 +84,7 @@
         );
 }
 
-#podium table {
+#podium .podium table {
     max-width: 600px !important; 
     display: inline-table;
 }

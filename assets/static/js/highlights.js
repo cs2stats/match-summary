@@ -301,7 +301,7 @@ $(document).ready(function () {
         `
     }
 
-    highlightsElement.on('click', 'button.award', function(e) {
+    $('main').on('click', 'button.award', function(e) {
         const target = $(this)
 
         $('#modal-award .modal-body p').text(target.data('description'))
