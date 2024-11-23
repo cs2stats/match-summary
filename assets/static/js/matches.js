@@ -22,6 +22,25 @@ $(document).ready(function () {
                     self.inputElement.value = ''
                 })
             }
+
+            $('#matches').on('change', 'select.order-match', function(e) {
+                const select = $(this)
+                const attribute = select.find("option:selected").val()
+                const matchIndex = select.closest('.match').data('index')
+
+                const match = self.matches.find(match => match.id === matchIndex)
+
+                const matchElement = $(`#match-${ matchIndex }`)
+
+                match.teams.forEach(team => {
+                    const table = matchElement.find(`.team[name="${ team.name }"] table tbody`)
+
+                    team.players = sortListObjectsByAttribute(team.players, attribute)
+
+                    table.empty()
+                    table.append(match.getPlayersByTeam(team))
+                })
+            })
         }
 
         addMatch(textContent) {
@@ -47,10 +66,6 @@ $(document).ready(function () {
 
                 reader.readAsText(file)
             }
-        }
-
-        getMatchByName () {
-            this.matches.push()
         }
 
         addNestedKeyRecursive(obj, keys, newKey, value, index = 0) {
@@ -164,7 +179,7 @@ $(document).ready(function () {
                 player.score5Kills = calculateMvpScoreByAttribute('enemy5Ks', player.enemy5Ks)
                 player.scoreKnife = calculateMvpScoreByAttribute('killsKnife', player.knifeKills)
                 player.scoreKillsPistol = calculateMvpScoreByAttribute('killsPistol', player.pistolKills)
-                player.scoreKillsSniper = calculateMvpScoreByAttribute('killsSniper', player.SniperKills)
+                player.scoreKillsSniper = calculateMvpScoreByAttribute('killsSniper', player.sniperKills)
                 player.scoreRoundsWithoutDying = calculateMvpScoreByAttribute('roundWithoutDying', player.roundWithoutDying)
                 player.scoreTimeAlive = calculateMvpScoreByAttribute('liveTime', player.liveTime)
 
@@ -236,7 +251,7 @@ $(document).ready(function () {
                     <th class="text-center">${ player.enemy5Ks }</th>
                     <th class="text-center">${ player.knifeKills }</th>
                     <th class="text-center">${ player.pistolKills }</th>
-                    <th class="text-center">${ player.SniperKills }</th>
+                    <th class="text-center">${ player.sniperKills }</th>
                     <th class="text-center">${ formatLiveTime(player.liveTime) }</th>
                     <th class="text-center">${ player.score }</th>
                     <th class="text-center">${ player.equipmentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }</th>
@@ -320,13 +335,13 @@ $(document).ready(function () {
 
         createMatchSection (self) {
             $.get(`${ relativePath }/templates/match.html`, function(matchData) {
-                matchData = matchData.replace('{{matchId}}', self.id)
+                matchData = matchData.replaceAll('{{matchId}}', self.id)
                 matchData = matchData.replace('{{matchName}}', self.name)
                 matchData = matchData.replace('{{matchResult}}', self.result)
             
                 const teamPromises = Array(2).fill(0).map((_, i) => {
                     return $.get(`${ relativePath }/templates/team.html`).then(function(teamData) {
-                        teamData = teamData.replace('{{teamName}}', `${self.teams[i].name}`)
+                        teamData = teamData.replaceAll('{{teamName}}', `${self.teams[i].name}`)
                         teamData = teamData.replace('{{firstHalfScore}}', `${self.teams[i].firstHalfScore}`)
                         teamData = teamData.replace('{{secondHalfScore}}', `${self.teams[i].secondHalfScore}`)
                         teamData = teamData.replace('{{players}}', self.getPlayersByTeam(self.teams[i]))
@@ -366,10 +381,12 @@ $(document).ready(function () {
                     <th class="text-center">${ player.firstKills }</th>
                     <th class="text-center">${ player.Wins1v1 }</th>
                     <th class="text-center">${ player.Wins1v2 }</th>
-                    <th class="text-center">${ player.knifeKills }</th>
                     <th class="text-center">${ player.enemy3Ks }</th>
                     <th class="text-center">${ player.enemy4Ks }</th>
                     <th class="text-center">${ player.enemy5Ks }</th>
+                    <th class="text-center">${ player.pistolKills }</th>
+                    <th class="text-center">${ player.sniperKills }</th>
+                    <th class="text-center">${ player.knifeKills }</th>
                     <th class="text-center">${ player.equipmentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }</th>
                     <th class="text-center">${ player.minutesLive }</th>
                 </tr>
@@ -383,9 +400,12 @@ $(document).ready(function () {
             this.name = data[`team${ reference}`]
             this.firstHalfScore = data['FirstHalfScore'][`team${ reference}`]
             this.secondHalfScore = data['SecondHalfScore'][`team${ reference}`]
-            this.players = Object.entries(data[`PlayersOnTeam${ reference }`]).map(([key, value]) => {
+
+            const players = Object.entries(data[`PlayersOnTeam${ reference }`]).map(([key, value]) => {
                 return new Player(this, value, data)
             })
+
+            this.players = sortListObjectsByAttribute(players, 'kd')
         }
     }
 
@@ -410,7 +430,7 @@ $(document).ready(function () {
             this.firstKills = data.firstKs
             this.knifeKills = data.kills_knife
             this.pistolKills = data.kills_weapon_pistol
-            this.SniperKills = data.kills_weapon_sniper
+            this.sniperKills = data.kills_weapon_sniper
             this.clutchKs = data.clutchKs
             this.dmr = formatTwoDecimalPlaces((data.MatchStats.Totals.Damage / match.round))
 

@@ -22,6 +22,14 @@ $(document).ready(function () {
         })
     }
 
+    function sortListObjectsByAttribute(list, attribute, desc = true) {
+        return list.sort((a, b) => {
+            const valueA = a[attribute]
+            const valueB = b[attribute]
+            return desc ? valueB - valueA : valueA - valueB
+        })
+    }
+
     function transformToRelativePath () {
         $('a[href]').each(function() {
             var currentHref = $(this).attr('href')
@@ -48,16 +56,6 @@ $(document).ready(function () {
     window.formatDecimal = formatDecimal
     window.formatTwoDecimalPlaces = formatTwoDecimalPlaces
     window.sortObjectByAttribute = sortObjectByAttribute
+    window.sortListObjectsByAttribute = sortListObjectsByAttribute
     window.transformToRelativePath = transformToRelativePath
 })
-
-// function sortObjectByAttribute(obj, attribute, desc = true) {
-//     return Object.fromEntries(
-//       Object.entries(obj)
-//         .sort(([, a], [, b]) => {
-//           const valueA = a[attribute];
-//           const valueB = b[attribute];
-//           return desc ? valueB - valueA : valueA - valueB;
-//         })
-//     );
-// }

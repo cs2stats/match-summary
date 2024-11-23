@@ -174,7 +174,7 @@ $(document).ready(function () {
         {
             title: '🎯 Sniper',
             description: 'Mais eliminações com Sniper.',
-            attribute: 'SniperKills',
+            attribute: 'sniperKills',
             condition: conditions[1],
             cover: defaultCover,
             awards: {

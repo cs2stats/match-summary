@@ -1,8 +1,40 @@
-<div id="match-{{matchId}}">
+<div id="match-{{matchId}}" class="match" data-index="{{matchId}}">
+
     <div class="px-4 pt-5 my-5">
-        <h1 class="display-4 fw-bold text-center">{{matchName}}</h1>
+        <div class="d-flex justify-content-center align-items-center">
+            <h1 class="display-4 fw-bold text-center position-absolute start-50 translate-middle-x">{{matchName}}</h1>
+
+            <div class="flex-grow-1"></div>
+
+            <select class="form-select order-match w-auto me-5">
+                <option value="kills">Vítimas</option>
+                <option value="deaths">Mortes</option>
+                <option value="assists">Assist.</option>
+                <option value="HSs">HSs</option>
+                <option value="enemyHSs">% HS</option>
+                <option value="mvps">★</option>
+                <option value="utilityDamage">DU</option>
+                <option value="enemiesFlashed">IC</option>
+                <option selected value="kd">K/D</option>
+                <option value="dmr">DMR</option>
+                <option value="damage">Dano</option>
+                <option value="objective">Reféns</option>
+                <option value="firstKills">First Kill</option>
+                <option value="Wins1v1">1x1 Win</option>
+                <option value="Wins1v2">1x2 Win</option>
+                <option value="enemy3Ks">3k</option>
+                <option value="enemy4Ks">4k</option>
+                <option value="enemy5Ks">5k</option>
+                <option value="pistolKills">Pistola</option>
+                <option value="sniperKills">Sniper</option>
+                <option value="knifeKills">Faca</option>
+                <option value="equipmentValue">Gastou</option>
+                <option value="liveTime">Tempo Vivo</option>
+            </select>
+        </div>
+
         <div class="col-lg-6 mx-auto">
-            <h3 class="text-center fw-lighter">{{matchResult}}</h3>
+            <h3 class="text-center fw-lighter mt-3">{{matchResult}}</h3>
 
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                 <!-- <button type="button" class="btn btn-outline-secondary btn-lg px-4">Remover Partida</button> -->

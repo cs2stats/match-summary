@@ -37,6 +37,10 @@ a {
     text-decoration: none;
 }
 
+table thead tr th {
+    cursor: pointer;
+}
+
 #mvp_score {
     user-select: none;
 }
@@ -79,7 +83,8 @@ img.cover {
     z-index: 2;
 }
 
-.btn-primary {
+.btn-primary,
+.btn-primary:focus {
     color: #fff;
     background-color: #2a357f;
     border-color: #2a357f;
