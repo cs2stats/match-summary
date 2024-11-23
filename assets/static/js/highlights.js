@@ -286,7 +286,7 @@ $(document).ready(function () {
                 data-award="${ award !== undefined ? true : false }"
                 data-award-description="${ award ? award.description : undefined }"
                 data-index="${ index }"
-                class="col-12 col-xxl-3 col-xl-4 col-md-6 col-sm-6 highlight ${ index !== 0 ? 'blur' : '' }"
+                class="col-4 col-xxl-3 col-md-6 col-sm-6 highlight ${ index !== 0 ? 'blur' : '' }"
             >
                 <div class="card h-100">
                     <img src="${ highlight.cover }" class="card-img-top cover animate__animated">
