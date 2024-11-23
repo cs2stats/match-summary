@@ -23,7 +23,7 @@ $(document).ready(function () {
                 })
             }
 
-            $('#matches').on('change', 'select.order-match', function(e) {
+            $('#matches').on('change', 'select.order-match', function() {
                 const select = $(this)
                 const attribute = select.find("option:selected").val()
                 const matchIndex = select.closest('.match').data('index')
@@ -39,6 +39,28 @@ $(document).ready(function () {
 
                     table.empty()
                     table.append(match.getPlayersByTeam(team))
+                })
+            })
+
+            $('#details').on('change', 'select.order-match-summary', function() {
+                const select = $(this)
+                const attribute = select.find("option:selected").val()
+                const matchIndex = select.closest('.match').data('index')
+                const tableId = select.data('table')
+                const table = $(`#${ tableId } tbody`)
+
+                sortListObjectsByAttribute(self.matchSummary, attribute)
+
+                table.empty()
+                
+                self.matchSummary.forEach((player, index) => {
+                    const position = index + 1
+
+                    if (tableId === 'detailsMatchesPlayers') {
+                        table.append(self.getDetailMatchesPlayerLine(position, player))
+                    } else if (tableId === 'detailsScorePlayers') {
+                        table.append(self.getDetailScorePlayerLine(position, player))
+                    }
                 })
             })
         }
@@ -249,9 +271,10 @@ $(document).ready(function () {
                     <th class="text-center">${ player.enemy3Ks }</th>
                     <th class="text-center">${ player.enemy4Ks }</th>
                     <th class="text-center">${ player.enemy5Ks }</th>
-                    <th class="text-center">${ player.knifeKills }</th>
                     <th class="text-center">${ player.pistolKills }</th>
                     <th class="text-center">${ player.sniperKills }</th>
+                    <th class="text-center">${ player.knifeKills }</th>
+                    <th class="text-center">${ player.roundWithoutDying }</th>
                     <th class="text-center">${ formatLiveTime(player.liveTime) }</th>
                     <th class="text-center">${ player.score }</th>
                     <th class="text-center">${ player.equipmentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }</th>
@@ -282,9 +305,9 @@ $(document).ready(function () {
                     <th class="text-center">${ formatDecimal(player.score3Kills) }</th>
                     <th class="text-center">${ formatDecimal(player.score4Kills) }</th>
                     <th class="text-center">${ formatDecimal(player.score5Kills) }</th>
-                    <th class="text-center">${ formatDecimal(player.scoreKnife) }</th>
                     <th class="text-center">${ formatDecimal(player.scoreKillsPistol) }</th>
                     <th class="text-center">${ formatDecimal(player.scoreKillsSniper) }</th>
+                    <th class="text-center">${ formatDecimal(player.scoreKnife) }</th>
                     <th class="text-center">${ formatDecimal(player.scoreRoundsWithoutDying) }</th>
                     <th class="text-center">${ formatDecimal(player.scoreTimeAlive) }</th>
                     <th class="text-center">${ formatDecimal(player.mvpScore) }</th>
