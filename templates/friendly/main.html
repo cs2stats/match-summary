@@ -9,36 +9,12 @@
                 <a href="friendlies" type="button" for="fileInput" class="btn btn-outline-secondary btn-lg px-4 gap-3">Histórico de Amistosos</a>
 
                 <button
-                    type="button"
                     class="btn btn-outline-secondary btn-lg px-4"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseMVPScore"
-                    aria-expanded="false"
-                    aria-controls="collapseMVPScore"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-mvp"
                 >
                     MVP
                 </button>
-            </div>
-
-            <div class="collapse mt-5e" id="collapseMVPScore">
-                <p class="lead mb-4 mt-4">
-                    MVP = ∑ (Pontuação)
-                </p>
-
-                <table id="mvp-score" class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Atributo</th>
-                                <th class="text-center">Medida</th>
-                                <th class="text-center">Pontuação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                </table>
-
-                <p id="mvpVersion" class="small mt-4">Versão 2</p>
             </div>
         </div>
     </div>
@@ -63,7 +39,15 @@
 
             <div class="flex-grow-1"></div>
 
-            <div id="podium-awards" class="me-5"></div>
+            <div id="podium-awards" class="me-5">
+                <button
+                    class="btn btn-outline-dark btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-mvp"
+                >
+                    🥇 MVP
+                </button>
+            </div>
         </div>
 
         <div class="podium">
@@ -302,4 +286,41 @@
             </div>
         </div>
     </div>
+
+    <div id="modal-mvp" class="modal" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🏆 MVP</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+
+                <div class="modal-body d-flex justify-content-center flex-column text-center">
+                    <p class="lead mb-4 mt-4">
+                        <b>MVP</b> = ∑ (Pontuação)
+                    </p>
+                
+                    <div id="mvp-score">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Atributo</th>
+                                    <th class="text-center">Medida</th>
+                                    <th class="text-center">Pontuação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </main>
