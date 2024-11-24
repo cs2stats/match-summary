@@ -28,7 +28,7 @@ $(document).ready(function () {
             condition: conditions[1],
             cover: `${ relativePath }/assets/covers/f-batista.jpg`,
             awards: {
-                '2.0': { description: 'Adesivo | Tarde Demais' },
+                '2.0': { description: 'Adesivo | Espectradores' },
             },
         },
         {
@@ -37,7 +37,9 @@ $(document).ready(function () {
             attribute: 'deaths',
             condition: conditions[0],
             cover: defaultCover,
-            awards: {},
+            awards: {
+                '2.0': { description: 'Adesivo | Repulsor' },
+            },
         },
         {
             title: '🎰 Máquina Mortífera',
@@ -46,7 +48,7 @@ $(document).ready(function () {
             condition: conditions[1],
             cover: defaultCover,
             awards: {
-                '2.0': { description: 'Emblema | Acerto de Contas' },
+                '2.0': { description: 'Adesivo | Corrida Armada' },
             },
         },
         {
@@ -56,7 +58,7 @@ $(document).ready(function () {
             condition: conditions[1],
             cover: defaultCover,
             awards: {
-                '2.0': { description: 'Adesivo | Espectradores' },
+                '2.0': { description: 'Adesivo | Macarrão' },
             },
         },
         {
@@ -86,7 +88,7 @@ $(document).ready(function () {
             condition: conditions[1],
             cover: defaultCover,
             awards: {
-                '2.0': { description: 'Adesivo | Resgate de Refém' },
+                '2.0': { description: 'Adesivo | Não se Preocupe, Peguei Você' },
             },
         },
         {
@@ -151,7 +153,9 @@ $(document).ready(function () {
             attribute: 'damage',
             condition: conditions[1],
             cover: defaultCover,
-            awards: {},
+            awards: {
+                '2.0': { description: 'Adesivo | Epicentro da Explosão' },
+            },
         },
         {
             title: '👶 Inofensivo',
@@ -197,7 +201,9 @@ $(document).ready(function () {
             attribute: 'Wins1v1',
             condition: conditions[1],
             cover: defaultCover,
-            awards: {},
+            awards: {
+                '2.0': { description: 'Adesivo | Seleção de Agente' },
+            },
         },
         {
             title: '👥 O Improvável',
@@ -242,7 +248,7 @@ $(document).ready(function () {
             condition: conditions[1],
             cover: defaultCover,
             awards: {
-                '2.0': { description: 'Adesivo | Dinheiro Sujo' },
+                '2.0': { description: 'Adesivo | Revenda Proibida' },
             },
         },
         {
@@ -251,7 +257,9 @@ $(document).ready(function () {
             attribute: 'equipmentValue',
             condition: conditions[0],
             cover: defaultCover,
-            awards: {},
+            awards: {
+                '2.0': { description: 'Adesivo | Canhoto (T)' },
+            },
         },
         {
             title: '⏳ Sobrevivente da Agency',
@@ -370,7 +378,7 @@ $(document).ready(function () {
                             class="btn btn-sm btn-outline-dark award animate__animated animate__tada"
                             data-bs-toggle="modal"
                             data-bs-target="#modal-award"
-                            data-src="${ relativePath }/assets/awards/${ mvpVersion }/${ attribute }.png",
+                            data-src="${ relativePath }/assets/awards/${ mvpVersion }/${ condition }-${ attribute }.png",
                             data-description="${ awardDescription }"
                         >
                             🎁 Prêmio

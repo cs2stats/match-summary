@@ -2,6 +2,26 @@ body {
     min-height: 100vh;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+   
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -45,6 +65,18 @@ table thead tr th {
     cursor: pointer;
 }
 
+#mvp-score {
+    max-height: 540px;
+    overflow-y: auto;
+}
+
+#mvp-score table          { overflow: auto; height: 100px; }
+#mvp-score table thead th { position: sticky; top: 0; z-index: 1; }
+
+#mvp-score table  { border-collapse: collapse; width: 100%; }
+#mvp-score th, td { padding: 8px 16px; }
+#mvp-score th     { background:#eee; }
+
 #mvp_score {
     user-select: none;
 }
@@ -75,12 +107,15 @@ table tbody tr td:first-child {
 #detailsScorePlayers thead tr th:first-child,
 #detailsScorePlayers tbody tr td:first-child,
 #friendlies thead tr th:first-child,
-#friendlies tbody tr td:first-child {
-    width: 10px !important;
-    width: 10px !important;
-    min-width: 10px !important;
-    max-width: 10px !important;
+#friendlies tbody tr td:first-child,
+#mvp-score table thead tr th:first-child,
+#mvp-score table tbody tr td:first-child {
+    width: 34px !important;
+    width: 34px !important;
+    min-width: 34px !important;
+    max-width: 34px !important;
     word-break: break-all;
+    text-align: center;
 }
 
 img.cover {
