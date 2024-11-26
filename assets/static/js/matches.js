@@ -44,6 +44,10 @@ $(document).ready(function () {
                 if (attribute === 'mvpScore') {
                     matchElement.find('tr th.mvp-score').addClass('text-dark')
                 }
+
+                if (friendly) {
+                    $('tr th.mvp-score').addClass('text-dark')
+                }
             })
 
             $('#details').on('change', 'select.order-match-summary', function() {

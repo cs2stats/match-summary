@@ -92,6 +92,10 @@ table thead tr th {
     filter: blur(.4rem);
 }
 
+.scrollme {
+    overflow-x: auto;
+}
+
 #matches table tr th.mvp-score {
     color: transparent;
     user-select: none !important;
@@ -148,11 +152,23 @@ img.cover {
 
 @media (max-width: 768px) {
     .px-5 {
-        padding: 0 !important;
+        padding: 1rem !important;
+    }
+
+    .translate-middle-x {
+        transform: translateX(0%) !important;
+    }
+
+    h1.position-absolute {
+        position: initial !important;
+    }
+
+    h3.text-center {
+        text-align: start !important;
     }
 
     #podium .container {
-        padding: 0;
+        padding: 1rem;
     }
 
     table {

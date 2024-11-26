@@ -34,6 +34,7 @@ $(document).ready(function () {
     `).join('')
 
     $('#mvp-score table tbody').html(html)
+    $('#mvp-score table modal-footer span.mvp-version').text(mvpVersion)
 
     mvpAwards[mvpVersion].forEach(award => {
         $('#podium-awards').append(`

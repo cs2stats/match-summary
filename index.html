@@ -60,7 +60,7 @@
         
                     <div class="flex-grow-1"></div>
         
-                    <div id="podium-awards" class="me-5">
+                    <div id="podium-awards" class="me-md-5">
                         <button
                             class="btn btn-outline-dark btn-sm"
                             data-bs-toggle="modal"
@@ -180,47 +180,49 @@
                     </select>
                 </div>
 
-                <table id="detailsMatchesPlayers" class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th style="width: 200px">Jogador</th>
-                            <th>Time</th>
-                            <th class="text-center">Vítimas</th>
-                            <th class="text-center">Mortes</th>
-                            <th class="text-center">Assist.</th>
-                            <th class="text-center">K/D</th>
-                            <th class="text-center">Reféns</th>
-                            <th class="text-center">★</th>
-                            <th class="text-center">HSs</th>
-                            <th class="text-center">% HS</th>
-                            <th class="text-center">DU</th>
-                            <th class="text-center">IC</th>
-                            <th class="text-center">Dano</th>
-                            <th class="text-center">DMR</th>
-                            <th class="text-center">First Kill</th>
-                            <th class="text-center">1x1 Win</th>
-                            <th class="text-center">1x2 Win</th>
-                            <th class="text-center">3k</th>
-                            <th class="text-center">4k</th>
-                            <th class="text-center">5k</th>
-                            <th class="text-center">Pistola</th>
-                            <th class="text-center">Sniper</th>
-                            <th class="text-center">Faca</th>
-                            <th class="text-center">RWD</th>
-                            <th class="text-center">T. Vivo</th>
-                            <th class="text-center">Pontuação</th>
-                            <th class="text-center">Gastou</th>
-                            <th class="text-center">MPV</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+                <div class="scrollme">
+                    <table id="detailsMatchesPlayers" class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th style="width: 200px">Jogador</th>
+                                <th>Time</th>
+                                <th class="text-center">Vítimas</th>
+                                <th class="text-center">Mortes</th>
+                                <th class="text-center">Assist.</th>
+                                <th class="text-center">K/D</th>
+                                <th class="text-center">Reféns</th>
+                                <th class="text-center">★</th>
+                                <th class="text-center">HSs</th>
+                                <th class="text-center">% HS</th>
+                                <th class="text-center">DU</th>
+                                <th class="text-center">IC</th>
+                                <th class="text-center">Dano</th>
+                                <th class="text-center">DMR</th>
+                                <th class="text-center">First Kill</th>
+                                <th class="text-center">1x1 Win</th>
+                                <th class="text-center">1x2 Win</th>
+                                <th class="text-center">3k</th>
+                                <th class="text-center">4k</th>
+                                <th class="text-center">5k</th>
+                                <th class="text-center">Pistola</th>
+                                <th class="text-center">Sniper</th>
+                                <th class="text-center">Faca</th>
+                                <th class="text-center">RWD</th>
+                                <th class="text-center">T. Vivo</th>
+                                <th class="text-center">Pontuação</th>
+                                <th class="text-center">Gastou</th>
+                                <th class="text-center">MPV</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
 
                 <p class="details-info">Nenhuma partida adicionada.</p>
 
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mt-5">
                     <h2 class="fw-bold">Pontuação</h2>
 
                     <select class="form-select order-match-summary w-auto" data-table="detailsScorePlayers">
@@ -249,39 +251,41 @@
                     </select>
                 </div>
                 
-                <table id="detailsScorePlayers" class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th style="width: 200px">Jogador</th>
-                            <th>Time</th>
-                            <th class="text-center">Vítimas</th>
-                            <th class="text-center">Mortes</th>
-                            <th class="text-center">Assist.</th>
-                            <th class="text-center">K/D</th>
-                            <th class="text-center">Reféns</th>
-                            <th class="text-center">★</th>
-                            <th class="text-center">HSs</th>
-                            <th class="text-center">DU</th>
-                            <th class="text-center">IC</th>
-                            <th class="text-center">Dano</th>
-                            <th class="text-center">First Kill</th>
-                            <th class="text-center">1x1 Win</th>
-                            <th class="text-center">1x2 Win</th>
-                            <th class="text-center">3k</th>
-                            <th class="text-center">4k</th>
-                            <th class="text-center">5k</th>
-                            <th class="text-center">Pistola</th>
-                            <th class="text-center">Sniper</th>
-                            <th class="text-center">Faca</th>
-                            <th class="text-center">RWD</th>
-                            <th class="text-center">T. Vivo</th>
-                            <th class="text-center">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+                <div class="scrollme">
+                    <table id="detailsScorePlayers" class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th style="width: 200px">Jogador</th>
+                                <th>Time</th>
+                                <th class="text-center">Vítimas</th>
+                                <th class="text-center">Mortes</th>
+                                <th class="text-center">Assist.</th>
+                                <th class="text-center">K/D</th>
+                                <th class="text-center">Reféns</th>
+                                <th class="text-center">★</th>
+                                <th class="text-center">HSs</th>
+                                <th class="text-center">DU</th>
+                                <th class="text-center">IC</th>
+                                <th class="text-center">Dano</th>
+                                <th class="text-center">First Kill</th>
+                                <th class="text-center">1x1 Win</th>
+                                <th class="text-center">1x2 Win</th>
+                                <th class="text-center">3k</th>
+                                <th class="text-center">4k</th>
+                                <th class="text-center">5k</th>
+                                <th class="text-center">Pistola</th>
+                                <th class="text-center">Sniper</th>
+                                <th class="text-center">Faca</th>
+                                <th class="text-center">RWD</th>
+                                <th class="text-center">T. Vivo</th>
+                                <th class="text-center">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
 
                 <p class="details-info">Nenhuma partida adicionada.</p>
             </div>
@@ -339,14 +343,13 @@
                     </div>
                 </div>
 
-                <div class="modal-footer">
+                <div class="modal-footer d-flex justify-content-between align-items-center">
+                    <p id="mvpVersion" class="small">Versão <span class="mvp-version"></span></p>
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <p id="mvpVersion" class="small mt-4">Versão 2</p>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
