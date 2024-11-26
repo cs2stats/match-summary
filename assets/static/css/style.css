@@ -92,6 +92,11 @@ table thead tr th {
     filter: blur(.4rem);
 }
 
+#matches table tr th.mvp-score {
+    color: transparent;
+    user-select: none !important;
+}
+
 table thead tr th:first-child,
 table tbody tr td:first-child {
   width: 10em;

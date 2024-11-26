@@ -40,6 +40,10 @@ $(document).ready(function () {
                     table.empty()
                     table.append(match.getPlayersByTeam(team))
                 })
+
+                if (attribute === 'mvpScore') {
+                    matchElement.find('tr th.mvp-score').addClass('text-dark')
+                }
             })
 
             $('#details').on('change', 'select.order-match-summary', function() {
@@ -62,6 +66,10 @@ $(document).ready(function () {
                         table.append(self.getDetailScorePlayerLine(position, player))
                     }
                 })
+            })
+
+            $('#matches').on('click', '.show-mvp-score', function() {
+                $(this).closest('table').find('tr th.mvp-score').addClass('text-dark')
             })
         }
 
@@ -373,15 +381,21 @@ $(document).ready(function () {
                     })
                 })
 
-                Promise.all(teamPromises).then((teamContents) => {
-                    const $matchContent = $('<div>').html(matchData)
-            
-                    teamContents.forEach((teamContent) => {
-                        $matchContent.find(`#match-${self.id} .teams`).append(teamContent)
-                    })
+                Promise
+                    .all(teamPromises)
+                    .then((teamContents) => {
+                        const $matchContent = $('<div>').html(matchData)
+                
+                        teamContents.forEach((teamContent) => {
+                            $matchContent.find(`#match-${self.id} .teams`).append(teamContent)
+                        })
 
-                    $('#matches').append($matchContent.html())
-                })
+                        $('#matches').append($matchContent.html())
+
+                        if (friendly) {
+                            $('tr th.mvp-score').addClass('text-dark')
+                        }
+                    })
             })        
         }
 
@@ -412,6 +426,7 @@ $(document).ready(function () {
                     <th class="text-center">${ player.knifeKills }</th>
                     <th class="text-center">${ player.equipmentValue.toLocaleString('en-US', {style: 'currency', currency: 'USD',}) }</th>
                     <th class="text-center">${ player.minutesLive }</th>
+                    <th class="text-center mvp-score">${ player.mvpScore.replace('.', ',') }</th>
                 </tr>
             `).join('')
         }
@@ -428,7 +443,7 @@ $(document).ready(function () {
                 return new Player(this, value, data)
             })
 
-            this.players = sortListObjectsByAttribute(players, 'kd')
+            this.players = sortListObjectsByAttribute(players, 'damage')
         }
     }
 
@@ -474,6 +489,54 @@ $(document).ready(function () {
             this.roundWithoutDying = match.round - data.deaths
             this.liveTime = data.MatchStats.Totals.LiveTime
             this.minutesLive = formatLiveTime(data.MatchStats.Totals.LiveTime)
+
+            // Score
+
+            this.scoreKills = calculateMvpScoreByAttribute('kills', this.kills)
+            this.scoreDeaths = calculateMvpScoreByAttribute('deaths', this.deaths)
+            this.scoreAssists = calculateMvpScoreByAttribute('assists', this.assists)
+            this.scoreKD = calculateMvpScoreByAttribute('kd', this.kd)
+            this.scoreObjective = calculateMvpScoreByAttribute('objective', this.objective)
+            this.scoreHighlights = calculateMvpScoreByAttribute('mvps', this.mvps)
+            this.scoreDamage = calculateMvpScoreByAttribute('damage', this.damage)
+            this.scoreHS = calculateMvpScoreByAttribute('enemyHSs', this.enemyHSs)
+            this.scoreUtilityDamage = calculateMvpScoreByAttribute('utilityDamage', this.utilityDamage)
+            this.scoreEnemiesFlashed = calculateMvpScoreByAttribute('enemiesFlashed', this.enemiesFlashed)
+            this.scoreFirstKills = calculateMvpScoreByAttribute('firstKs', this.firstKills)
+            this.score1v1 = calculateMvpScoreByAttribute('Count1v1', this.Count1v1)
+            this.score1v2 = calculateMvpScoreByAttribute('Count1v1', this.Count1v2)
+            this.score3Kills = calculateMvpScoreByAttribute('enemy3Ks', this.enemy3Ks)
+            this.score4Kills = calculateMvpScoreByAttribute('enemy4Ks', this.enemy4Ks)
+            this.score5Kills = calculateMvpScoreByAttribute('enemy5Ks', this.enemy5Ks)
+            this.scoreKnife = calculateMvpScoreByAttribute('killsKnife', this.knifeKills)
+            this.scoreKillsPistol = calculateMvpScoreByAttribute('killsPistol', this.pistolKills)
+            this.scoreKillsSniper = calculateMvpScoreByAttribute('killsSniper', this.sniperKills)
+            this.scoreRoundsWithoutDying = calculateMvpScoreByAttribute('roundWithoutDying', this.roundWithoutDying)
+            this.scoreTimeAlive = calculateMvpScoreByAttribute('liveTime', this.liveTime)
+
+            this.mvpScore = (
+                this.scoreKills +
+                this.scoreDeaths +
+                this.scoreAssists +
+                this.scoreKD +
+                this.scoreObjective +
+                this.scoreHighlights +
+                this.scoreDamage +
+                this.scoreHS +
+                this.scoreUtilityDamage +
+                this.scoreEnemiesFlashed +
+                this.scoreFirstKills +
+                this.score1v1 +
+                this.score1v2 +
+                this.score3Kills +
+                this.score4Kills +
+                this.score5Kills +
+                this.scoreKnife +
+                this.scoreKillsPistol +
+                this.scoreKillsSniper +
+                this.scoreRoundsWithoutDying +
+                this.scoreTimeAlive
+            ).toFixed(2)
         }
     }
 

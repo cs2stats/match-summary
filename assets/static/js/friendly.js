@@ -28,19 +28,19 @@ $(document).ready(function () {
                     }
                     return response.text()
                 })
-          )
+            )
 
-          Promise.all(promises)
-            .then(contents => {
-                contents.forEach(content => {
-                  matches.addMatch(content)
+            Promise.all(promises)
+                .then(contents => {
+                    contents.forEach(content => {
+                        matches.addMatch(content)
+                    })
+
+                    $('#highlights .highlight button').click()
                 })
-
-                $('#highlights .highlight button').click()
-            })
-            .catch(error => {
-                console.error('Erro ao ler os arquivos:', error)
-            })
+                .catch(error => {
+                    console.error('Erro ao ler os arquivos:', error)
+                })
     }
 
     $.get(`${ relativePath }/templates/friendly/main.html`, function (mainData) {

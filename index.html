@@ -175,7 +175,7 @@
                         <option value="knifeKills">Faca</option>
                         <option value="roundWithoutDying">RWD</option>
                         <option value="liveTime">Tempo Vivo</option>
-                        <option value="score">Tempo Vivo</option>
+                        <option value="score">Pontuação</option>
                         <option value="equipmentValue">Gastou</option>
                     </select>
                 </div>
@@ -224,7 +224,7 @@
                     <h2 class="fw-bold">Pontuação</h2>
 
                     <select class="form-select order-match-summary w-auto" data-table="detailsScorePlayers">
-                        <option selected value="mvpScore">Pontuação Total</option>
+                        <option selected value="mvpScore">Total</option>
                         <option value="scoreKills">Vítimas</option>
                         <option value="scoreDeaths">Mortes</option>
                         <option value="scoreAssists">Assist.</option>
@@ -357,6 +357,7 @@
 
     <script>
         const mvpVersion = Object.keys(mvpScores)[Object.keys(mvpScores).length - 1]
+        const friendly = false
     </script>
 
     <script src="assets/static/js/players.js"></script>

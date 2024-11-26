@@ -78,7 +78,7 @@ $(document).ready(function () {
             condition: conditions[1],
             cover: defaultCover,
             awards: {
-                '2.0': { description: 'Adesivo | A Volta da Estrela Cadente' },
+                '2.0': { description: 'Grafite Lacrado | A Volta da Estrela Cadente' },
             },
         },
         {
