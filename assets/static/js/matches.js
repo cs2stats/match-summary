@@ -406,7 +406,7 @@ $(document).ready(function () {
         getPlayersByTeam (team) {
             return team.players.map(player => `
                 <tr>
-                    <th>${ player.name }</th>
+                    <th>${ playersData[player.id].name }</th>
                     <th class="text-center">${ player.kills }</th>
                     <th class="text-center">${ player.deaths }</th>
                     <th class="text-center">${ player.assists }</th>

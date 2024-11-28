@@ -40,6 +40,10 @@ $(document).ready(function () {
             name: 'BATISTA',
             avatar: `${ relativePath }/assets/players/187563695.jpg`,
         },
+        276912860: {
+            name: 'O Nicolino',
+            avatar: `${ relativePath }/assets/players/276912860.jpg`,
+        },
     }
 
     window.playersData = playersData
