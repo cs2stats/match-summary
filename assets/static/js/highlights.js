@@ -1,6 +1,7 @@
 $(document).ready(function () {
     const defaultCover = `${ relativePath }/assets/brand/cs-jackson.png`
     const conditions = ['worse', 'better']
+    const ignoreAtributeValues = ['worse-utilityDamage']
 
     const highlights = [
         {
@@ -340,7 +341,7 @@ $(document).ready(function () {
 
             e.target.remove()
 
-            if (player[attribute] > 0) {
+            if (player[attribute] > 0 || ignoreAtributeValues.includes(`${ condition }-${ attribute }`)) {
                 formatedAttr = 0
 
                 if (attribute === 'liveTime')
