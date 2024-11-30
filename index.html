@@ -26,7 +26,7 @@
                 <div class="col-lg-6 mx-auto  mt-4">
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                         <label type="button" for="fileInput" class="btn btn-primary btn-lg px-4 gap-3">Adicionar Partida</label>
-                        <a href="friendlies" type="button" for="fileInput" class="btn btn-outline-secondary btn-lg px-4 gap-3">Histórico de Amistosos</a>
+                        <a href="matches" type="button" for="fileInput" class="btn btn-outline-secondary btn-lg px-4 gap-3">Histórico de Amistosos</a>
                         <input type="file" id="fileInput" accept=".txt">
 
                         <button
@@ -360,11 +360,12 @@
 
     <script>
         const mvpVersion = Object.keys(mvpScores)[Object.keys(mvpScores).length - 1]
-        const friendly = false
+        const revealData = false
+        const awardWinning = true
     </script>
 
     <script src="assets/static/js/players.js"></script>
     <script src="assets/static/js/mvp.js"></script>
-    <script src="assets/static/js/matches.js"></script>
+    <script src="assets/static/js/summary.js"></script>
     <script src="assets/static/js/highlights.js"></script>
 </html>

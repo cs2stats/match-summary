@@ -371,7 +371,7 @@ $(document).ready(function () {
             }
 
             setTimeout(() => {
-                if (award) {
+                if (award && awardWinning) {
                     highlight.find('.card-body').append(`
                         <button
                             for="highlight-better-kills"

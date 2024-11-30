@@ -53,7 +53,10 @@ pre {
     border-radius: 20px;
 }
 
-input[type="file"] {
+input[type="file"],
+table#majors,
+table#friendlies,
+table#trainings {
     display: none;
 }
 
@@ -115,8 +118,8 @@ table tbody tr td:first-child {
 #detailsMatchesPlayers tbody tr td:first-child,
 #detailsScorePlayers thead tr th:first-child,
 #detailsScorePlayers tbody tr td:first-child,
-#friendlies thead tr th:first-child,
-#friendlies tbody tr td:first-child,
+#match-list table thead tr th:first-child,
+#match-list table tbody tr td:first-child,
 #mvp-score table thead tr th:first-child,
 #mvp-score table tbody tr td:first-child {
     width: 34px !important;

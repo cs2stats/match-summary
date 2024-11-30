@@ -36,20 +36,22 @@ $(document).ready(function () {
     $('#mvp-score table tbody').html(html)
     $('#mvp-score table modal-footer span.mvp-version').text(mvpVersion)
 
-    mvpAwards[mvpVersion].forEach(award => {
-        $('#podium-awards').append(`
-            <button
-                for="highlight-better-kills"
-                class="btn btn-sm btn-outline-dark award animate__animated animate__tada"
-                data-bs-toggle="modal"
-                data-bs-target="#modal-award"
-                data-src="${ relativePath }/assets/awards/${ mvpVersion }/${ award.name }.png",
-                data-description="${ award.description }"
-            >
-                🎁 ${ award.name }
-            </button>
-        `)
-    })
+    if (awardWinning) {
+        mvpAwards[mvpVersion].forEach(award => {
+            $('#podium-awards').append(`
+                <button
+                    for="highlight-better-kills"
+                    class="btn btn-sm btn-outline-dark award animate__animated animate__tada"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-award"
+                    data-src="${ relativePath }/assets/awards/${ mvpVersion }/${ award.name }.png",
+                    data-description="${ award.description }"
+                >
+                    🎁 ${ award.name }
+                </button>
+            `)
+        })
+    }
 
     window.calculateMvpScoreByAttribute = calculateMvpScoreByAttribute
 })

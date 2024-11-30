@@ -18,7 +18,7 @@
     </head>
 
     <body>
-        <main>
+        <main id="match-list">
             <div class="px-4 py-5 my-5 text-center">
                 <img class="d-block mx-auto mb-4" src="../assets/brand/cs2-logo.jpg" alt="" width="72" height="72">
                 <h1 class="display-5 fw-bold">CS2 - Amistosos</h1>
@@ -32,10 +32,56 @@
 
             <div class="b-example-divider"></div>
 
-            <div class="px-4 py-5 my-5 text-center">
-                <h1 class="display-5 fw-bold">Histórico</h1>
+            <div class="px-4 my-5 text-center">
+                <h1 class="display-5 fw-bold mb-5">Majors</h1>
 
-                <table id="friendlies" class="table table-striped table-hover">
+                <table id="major" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th>Nome</th>
+                            <th>Data</th>
+                            <th>Time 1</th>
+                            <th>Time 2</th>
+                            <th>Resultado</th>
+                            <th>MVP</th>
+                            <th>LVP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="b-example-divider"></div>
+
+            <div class="px-4 my-5 text-center">
+                <h1 class="display-5 fw-bold mb-5">Amistosos</h1>
+
+                <table id="friendly" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th>Nome</th>
+                            <th>Data</th>
+                            <th>Time 1</th>
+                            <th>Time 2</th>
+                            <th>Resultado</th>
+                            <th>MVP</th>
+                            <th>LVP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="b-example-divider"></div>
+
+            <div class="px-4 my-5 text-center">
+                <h1 class="display-5 fw-bold mb-5">Treinos</h1>
+
+                <table id="training" class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -63,5 +109,6 @@
 
     <script src="../assets/static/js/constants.js"></script>
     <script src="../assets/static/js/utils.js"></script>
-    <script src="../assets/static/js/friendlies.js"></script>
+    <script src="../assets/static/js/players.js"></script>
+    <script src="../assets/static/js/matches.js"></script>
 </html>
