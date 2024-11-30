@@ -25,12 +25,12 @@ $(document).ready(function () {
     const trainings = [
         {
             'name': 'Treino que o Arthur caiu',
-            'date': '27/10/2024 22:00',
+            'date': '28/11/2024 22:00',
             'team1': 'Time 1',
             'team2': 'Time A',
-            'mvp': 328904852,
-            'lvp': 186585363,
-            'result': '1:1',
+            'mvp': 397076720,
+            'lvp': 276912860,
+            'result': '0:1',
         },
     ]
 
